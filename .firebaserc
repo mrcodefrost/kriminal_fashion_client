@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "kriminal-30866"
+  },
+  "targets": {
+    "kriminal-30866": {
+      "hosting": {
+        "client": [
+          "kriminal-fashion"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

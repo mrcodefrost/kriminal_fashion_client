@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "509554553544",
+    "project_id": "kriminal-30866",
+    "storage_bucket": "kriminal-30866.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509554553544:android:755667194f6017bcfaebfd",
+        "android_client_info": {
+          "package_name": "com.example.kriminal_fashion_client"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWEetQZFqvTTou4P0Ghys9YQm9M9C0EVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509554553544:android:cb96081ffb5ebb4cfaebfd",
+        "android_client_info": {
+          "package_name": "com.mrcodefrost.kriminal_fashion_ecommerce"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWEetQZFqvTTou4P0Ghys9YQm9M9C0EVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
