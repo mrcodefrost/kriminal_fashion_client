@@ -25,7 +25,11 @@ Kriminal Fashion App is the customer-facing application for browsing and purchas
  
 2. Navigate to the project directory:
 
-3. Install dependencies:
+ ```bash
+   cd kriminal_fashion_client
+ ```
+
+3. Install dependencies by running this command in IDE terminal:
 
  ```bash
    flutter pub get
