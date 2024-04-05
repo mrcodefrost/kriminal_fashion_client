@@ -37,8 +37,7 @@ Kriminal Fashion App is the customer-facing application for browsing and purchas
  ```bash
    git clone https://github.com/mrcodefrost/kriminal_fashion_client.git
  ```
- 
- 
+
 2. Navigate to the project directory:
 
  ```bash
@@ -53,20 +52,20 @@ Kriminal Fashion App is the customer-facing application for browsing and purchas
 
 4. Set up Firebase:
 
-- If you haven't already, [sign in to your Firebase account](https://firebase.google.com/docs/web/setup).
-- Install Firebase CLI globally using IDE Terminal:
-    ```bash
+If you haven't already, [sign in to your Firebase account](https://firebase.google.com/docs/web/setup).
+Install Firebase CLI globally using IDE Terminal:
+ ```bash
    flutter pub get
-    ```
-- Log in to Firebase
-    ```bash
+ ```
+Log in to Firebase
+ ```bash
    firebase login
-    ```
+ ```
 
-- Activate Flutterfire CLI
-    ```bash
+Activate Flutterfire CLI
+ ```bash
    flutter pub global activate flutterfire_cli
-    ```
+ ```
 
 
 ### Configuration
