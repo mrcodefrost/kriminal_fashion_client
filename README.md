@@ -1,16 +1,63 @@
-# kriminal_fashion_client
+# Client Side App (Customer App)
 
-A new Flutter project.
+## Kriminal Fashion App
 
-## Getting Started
+Kriminal Fashion App is the customer-facing application for browsing and purchasing high-quality fashion items from the Kriminal brand. This app provides a seamless shopping experience for users, allowing them to browse products, add them to their cart, and make purchases securely.
 
-This project is a starting point for a Flutter application.
+### Features
 
-A few resources to get you started if this is your first Flutter project:
+- **Product Catalog:** Browse high-quality fashion items from the Kriminal brand.
+- **Search and Filter:** Search for specific products and filter them based on categories.
+- **User Authentication:** Secure user authentication using Firebase authentication.
+- **PhonePe Gateway:** Payment integration using the PhonePe gateway for secure transactions.
+- **OTP Login:** Login using OTP verification for quick and easy access.
+- **Address Management:** Add and manage delivery addresses for orders.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Installation
+
+1. Clone the repository to your local machine:
+
+ ```bash
+   git clone https://github.com/mrcodefrost/kriminal_fashion_client.git
+ ```
+ 
+ 
+2. Navigate to the project directory:
+
+3. Install dependencies:
+
+ ```bash
+   flutter pub get
+ ```
+
+4. Set up Firebase:
+
+- If you haven't already, [sign in to your Firebase account](https://firebase.google.com/docs/web/setup).
+- Install Firebase CLI globally:
+- Log in to Firebase:
+
+### Configuration
+
+1. Create a `firebase.json` file in the root directory of your project:
+
+2. Copy and paste the following configuration into the `firebase.json` file:
+
+```json
+{
+  "hosting": {
+     "target": "client",
+    "public":  "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
+```
+
+
+
+
+
