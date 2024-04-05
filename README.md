@@ -13,6 +13,22 @@ Kriminal Fashion App is the customer-facing application for browsing and purchas
 - **OTP Login:** Login using OTP verification for quick and easy access.
 - **Address Management:** Add and manage delivery addresses for orders.
 
+### Usage
+
+- Browse through the catalog and select products of interest.
+- Add products to the cart and proceed to checkout.
+- Enter delivery address and make payment using the PhonePe gateway (in test mode).
+
+### Platforms
+
+- Android
+- iOS
+- Web
+
+### Technologies Used
+
+- Flutter
+- Firebase
 
 ### Installation
 
@@ -73,7 +89,6 @@ Kriminal Fashion App is the customer-facing application for browsing and purchas
 }
 ```
 
+### License
 
-
-
-
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
