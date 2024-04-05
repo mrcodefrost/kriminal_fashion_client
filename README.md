@@ -38,14 +38,26 @@ Kriminal Fashion App is the customer-facing application for browsing and purchas
 4. Set up Firebase:
 
 - If you haven't already, [sign in to your Firebase account](https://firebase.google.com/docs/web/setup).
-- Install Firebase CLI globally:
-- Log in to Firebase:
+- Install Firebase CLI globally using IDE Terminal:
+    ```bash
+   flutter pub get
+    ```
+- Log in to Firebase
+    ```bash
+   firebase login
+    ```
+
+- Activate Flutterfire CLI
+    ```bash
+   flutter pub global activate flutterfire_cli
+    ```
+
 
 ### Configuration
 
-1. Create a `firebase.json` file in the root directory of your project:
+1. Create a `firebase.json` file in the root directory of your project
 
-2. Copy and paste the following configuration into the `firebase.json` file:
+2. Copy and paste the following configuration into the `firebase.json` file
 
 ```json
 {
