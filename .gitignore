@@ -48,3 +48,4 @@ app.*.map.json
 .firebaserc
 firebase.json
 lib/model/*.g.dart
+lib/features/common/data/model/*.g.dart
