@@ -65,6 +65,7 @@ class AuthController extends GetxController {
 
       final random = Random();
       int otp = 1000 + random.nextInt(9380);
+      // remove this later
       print(otp);
       // if otp was sent successfully or not
       if (otp != null) {
