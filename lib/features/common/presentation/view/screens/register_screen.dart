@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/controller/auth_controller.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/otp_text_field.dart';
 import 'package:kriminal_fashion_client/utils/validations.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -52,15 +53,28 @@ class RegisterScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
+              OtpTextField(
+                otpController: authController.otpController,
+                visible: authController.otpFieldShown,
+                onComplete: (otp) {
+                  authController.otpEntered = int.tryParse(otp ?? '0000');
+                },
+              ),
+              const SizedBox(height: 20),
               ElevatedButton(
                   onPressed: () {
-                    authController.addUser();
+                    if (authController.otpFieldShown) {
+                      authController.addUser();
+                    } else {
+                      authController.sendOTP();
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: context.theme.colorScheme.inversePrimary,
                     backgroundColor: context.theme.colorScheme.primary,
                   ),
-                  child: const Text('Register')),
+                  child: Text(
+                      authController.otpFieldShown ? 'Register' : 'Send OTP')),
               TextButton(
                   onPressed: () {},
                   child: const Text('Already have an account ? Login')),

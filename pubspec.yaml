@@ -43,6 +43,7 @@ dependencies:
   cloud_firestore: ^4.16.0
   json_annotation: ^4.8.1
   liquid_pull_to_refresh: ^3.0.1
+  otp_text_field_v2: ^1.0.3
 
 dev_dependencies:
   json_serializable : ^6.7.1
