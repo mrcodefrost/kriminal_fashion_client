@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/controller/auth_controller.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/otp_text_field.dart';
 import 'package:kriminal_fashion_client/utils/validations.dart';
 
@@ -35,6 +36,7 @@ class RegisterScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
+              // User Mobile Number
               TextFormField(
                 controller: authController.registerNumberController,
                 keyboardType: TextInputType.phone,
@@ -55,26 +57,38 @@ class RegisterScreen extends StatelessWidget {
               const SizedBox(height: 20),
               OtpTextField(
                 otpController: authController.otpController,
-                visible: authController.otpFieldShown,
-                onComplete: (otp) {
-                  authController.otpEntered = int.tryParse(otp ?? '0000');
+                // visible: authController.otpFieldShown.value,
+                visible: true,
+                onComplete: (code) async {
+                  // this returns true or false depending on verification
+                  authController.otpVerified = await authController
+                      .verifyOtp(code ?? '0000'); // this verifies otp
+
+                  if (authController.otpVerified) {
+                    authController.addUser();
+                    Get.to(HomeScreen());
+                  } else {
+                    Get.snackbar('Error', 'Incorrect OTP');
+                  }
                 },
               ),
               const SizedBox(height: 20),
               ElevatedButton(
                   onPressed: () {
-                    if (authController.otpFieldShown) {
-                      authController.addUser();
+                    if (authController.otpFieldShown.value) {
+                      // authController.addUser();
                     } else {
-                      authController.sendOTP();
+                      authController.otpAuthentication(); // this sends the otp
+                      authController.otpFieldShown = true.obs;
                     }
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: context.theme.colorScheme.inversePrimary,
                     backgroundColor: context.theme.colorScheme.primary,
                   ),
-                  child: Text(
-                      authController.otpFieldShown ? 'Register' : 'Send OTP')),
+                  child: Text(authController.otpFieldShown.value
+                      ? 'Register'
+                      : 'Send OTP')),
               TextButton(
                   onPressed: () {},
                   child: const Text('Already have an account ? Login')),
