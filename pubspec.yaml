@@ -45,6 +45,7 @@ dependencies:
   liquid_pull_to_refresh: ^3.0.1
   otp_text_field_v2: ^1.0.3
   firebase_auth: ^4.19.1
+  get_storage: ^2.1.1
 
 dev_dependencies:
   json_serializable : ^6.7.1

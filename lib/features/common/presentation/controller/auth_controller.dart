@@ -2,24 +2,48 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/screens/login_screen.dart';
 import 'package:otp_text_field_v2/otp_field_v2.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/model/client_user_model.dart';
 
 class AuthController extends GetxController {
+  // instances
   final firestore = FirebaseFirestore.instance;
   final firebaseAuth = FirebaseAuth.instance;
   late CollectionReference userCollection;
+  final prefs = Get.find<SharedPreferences>();
+  final box = GetStorage();
 
+  // text controllers
   TextEditingController registerNameController = TextEditingController();
   TextEditingController registerNumberController = TextEditingController();
+  TextEditingController loginNumberController = TextEditingController();
 
   // OTP related
   OtpFieldControllerV2 otpController = OtpFieldControllerV2();
   RxBool otpFieldShown = false.obs;
   var verificationId = ''.obs;
   bool otpVerified = false;
+
+  // Get storage user
+
+  ClientUser? loginUser;
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+
+    Map<String, dynamic>? user = box.read('loginUser');
+    if (user != null) {
+      loginUser = ClientUser.fromJson(user);
+      Get.to(HomeScreen());
+    }
+    super.onReady();
+  }
 
   @override
   void onInit() {
@@ -94,6 +118,7 @@ class AuthController extends GetxController {
 
   // if verified ? navigate to new screen : go back
 
+  // tries signing in the user and returns true or false if credentials match
   Future<bool> verifyOtp(String otp) async {
     var credentials = await firebaseAuth.signInWithCredential(
         PhoneAuthProvider.credential(
@@ -102,10 +127,40 @@ class AuthController extends GetxController {
     return credentials.user != null ? true : false;
   }
 
+  // logins without password - needs to be implemented
+  Future<void> loginWithPhone() async {
+    try {
+      String phoneNumber = loginNumberController.text;
+      if (phoneNumber.isNotEmpty) {
+        var querySnapshot = await userCollection
+            .where('number', isEqualTo: int.parse(phoneNumber))
+            .limit(1)
+            .get();
+        if (querySnapshot.docs.isNotEmpty) {
+          var userDoc = querySnapshot.docs.first;
+          var userData = userDoc.data() as Map<String, dynamic>;
+          box.write('loginUser', userData);
+          // prefs.setString('loginUser', jsonEncode(userData));
+          loginNumberController.clear();
+          Get.to(HomeScreen());
+          Get.snackbar('Success', 'Login Successful', colorText: Colors.green);
+        } else {
+          Get.snackbar('Error', 'User not found, please register',
+              colorText: Colors.red);
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    } finally {
+      update();
+    }
+  }
+
   void signOut() async {
     try {
       await FirebaseAuth.instance.signOut();
-      Get.off(const LoginScreen());
+      // Get.off(const LoginScreen());
+      Get.offAll(const LoginScreen());
     } catch (e) {
       debugPrint('Error signing out: $e');
     }

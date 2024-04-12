@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 ThemeData lightMode = ThemeData(
     fontFamily: GoogleFonts.comfortaa().fontFamily,
     colorScheme: const ColorScheme.light(
-      background: Color(0xfffefae0),
-      primary: Color(0xff606c38),
-      secondary: Color(0xff1b512d),
-      tertiary: Color(0xffc9ada7),
-      inversePrimary: Color(0xffbc6c25),
+      background: Color(0xffFAFAFF), // lightest
+      tertiary: Color(0xffEEF0F2), // 2nd lightest
+      primary: Color(0xff000000), // 3rd
+      secondary: Color(0xff252323), // 4th
+      inversePrimary: Color(0xff70798c), // darkest
     ));

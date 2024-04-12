@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class ProductCard extends StatelessWidget {
   final String name;
   final String imageURL;
-  final String price;
+  final double price;
   final String offerTag;
   final Function onTap;
   final int index;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomDropDownMenu extends StatelessWidget {
   final List<String> items;
@@ -25,10 +26,10 @@ class CustomDropDownMenu extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         // Use BoxDecoration for border and background
-        border: Border.all(color: Colors.white), // Border on all sides
-        borderRadius:
-            BorderRadius.circular(8), // Adjust border radius as needed
-        color: Colors.white,
+        border: Border.all(
+            color: context.theme.colorScheme.secondary), // Border on all sides
+        borderRadius: BorderRadius.zero, // Adjust border radius as needed
+        color: Colors.transparent,
       ),
       child: DropdownMenu(
         width: 130,
@@ -38,6 +39,12 @@ class CustomDropDownMenu extends StatelessWidget {
         inputDecorationTheme: const InputDecorationTheme(
           contentPadding: EdgeInsets.symmetric(horizontal: 15),
           enabledBorder: InputBorder.none,
+        ),
+        menuStyle: MenuStyle(
+          backgroundColor: MaterialStatePropertyAll<Color>(
+              context.theme.colorScheme.tertiary),
+          elevation: MaterialStateProperty.all<double>(
+              0.0), // more explicit than using propertyAll
         ),
       ),
     );

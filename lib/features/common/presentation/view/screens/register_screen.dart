@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/controller/auth_controller.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/screens/login_screen.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/otp_text_field.dart';
 import 'package:kriminal_fashion_client/utils/validations.dart';
 
@@ -90,7 +91,9 @@ class RegisterScreen extends StatelessWidget {
                       ? 'Register'
                       : 'Send OTP')),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(const LoginScreen());
+                  },
                   child: const Text('Already have an account ? Login')),
             ],
           ),
