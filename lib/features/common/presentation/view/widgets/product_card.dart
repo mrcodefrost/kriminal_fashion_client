@@ -54,18 +54,17 @@ class ProductCard extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 name,
-                style: TextStyle(fontSize: 16),
-                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 14),
+                overflow: TextOverflow.visible,
               ),
               const SizedBox(height: 10),
               Text(
-                'Rs. $price',
-                style: TextStyle(fontSize: 16),
+                'Rs. ${price.toStringAsFixed(2)}',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 5),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 8),
                 decoration: BoxDecoration(
                   color: context.theme.colorScheme.tertiary,
                   borderRadius: BorderRadius.circular(12),

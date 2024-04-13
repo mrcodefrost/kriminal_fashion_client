@@ -28,6 +28,9 @@ class Product {
   @JsonKey(name: "offer")
   bool? offer;
 
+  @JsonKey(name: 'shortTag')
+  String? shortTag;
+
   Product({
     this.id,
     this.name,
@@ -37,6 +40,7 @@ class Product {
     this.offer,
     this.price,
     this.brand,
+    this.shortTag,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) =>

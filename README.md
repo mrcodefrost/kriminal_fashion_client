@@ -68,6 +68,12 @@ Activate Flutterfire CLI
  ```
 
 
+5. Generate Model files by running this command
+
+ ```bash
+  dart run build_runner build --delete-conflicting-outputs
+ ```
+
 ### Configuration
 
 1. Create a `firebase.json` file in the root directory of your project

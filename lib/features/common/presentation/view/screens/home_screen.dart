@@ -9,6 +9,7 @@ import 'package:kriminal_fashion_client/features/common/presentation/view/widget
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/product_card.dart';
 import 'package:kriminal_fashion_client/themes/theme_controller.dart';
 import 'package:kriminal_fashion_client/utils/constants/app_constants.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -19,6 +20,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProductController>(builder: (productController) {
+      Future<void> refresh() async {
+        await productController.fetchProducts();
+      }
+
       return Scaffold(
         backgroundColor: context.theme.colorScheme.background,
         appBar: AppBar(
@@ -91,34 +96,37 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 30),
-              Expanded(
-                child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 8,
-                        childAspectRatio: 0.37,
-                        mainAxisSpacing: 8),
-                    itemCount: productController.products.length,
-                    itemBuilder: (context, index) {
-                      return ProductCard(
-                        name:
-                            productController.products[index].name ?? 'No Name',
-                        price: productController.products[index].price ?? 0.0,
-                        // TODO : add offerTag in product model on both apps
-                        offerTag: 'Black | 8372/090',
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      ProductDescriptionScreen()));
-                        },
-                        imageURL: productController.products[index].image ??
-                            AppImages.demoImageURL,
-
-                        index: index,
-                      );
-                    }),
+              LiquidPullToRefresh(
+                onRefresh: refresh,
+                child: Expanded(
+                  child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 8,
+                          childAspectRatio: 0.45,
+                          mainAxisSpacing: 8),
+                      itemCount: productController.products.length,
+                      itemBuilder: (context, index) {
+                        return ProductCard(
+                          name: productController.products[index].name ??
+                              'No Name',
+                          price: productController.products[index].price ?? 0.0,
+                          offerTag:
+                              productController.products[index].shortTag ??
+                                  'No Tags',
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ProductDescriptionScreen()));
+                          },
+                          imageURL: productController.products[index].image ??
+                              AppImages.demoImageURL,
+                          index: index,
+                        );
+                      }),
+                ),
               ),
             ],
           ),
