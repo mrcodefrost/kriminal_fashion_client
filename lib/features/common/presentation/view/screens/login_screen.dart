@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/controller/auth_controller.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/screens/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, required this.onTap});
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,9 @@ class LoginScreen extends StatelessWidget {
                   child: const Text('Login')),
               TextButton(
                   onPressed: () {
-                    Get.to(const LoginScreen());
+                    Get.to(RegisterScreen(
+                      onTap: onTap,
+                    ));
                   },
                   child: const Text('Register new account')),
             ],

@@ -24,81 +24,83 @@ class HomeScreen extends StatelessWidget {
         await productController.fetchProducts();
       }
 
-      return Scaffold(
-        backgroundColor: context.theme.colorScheme.background,
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
-          backgroundColor: Colors.transparent,
-          title: const Text('K R I M I N A L'),
-          titleTextStyle:
-              TextStyle(color: context.theme.colorScheme.primary, fontSize: 24),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  ThemeController.toggleThemeMode();
-                },
-                icon: Icon(
-                  Icons.lightbulb,
-                  color: context.theme.colorScheme.inversePrimary,
-                )),
-            GetBuilder<AuthController>(builder: (authController) {
-              return IconButton(
+      return LiquidPullToRefresh(
+        onRefresh: refresh,
+        child: Scaffold(
+          backgroundColor: context.theme.colorScheme.background,
+          appBar: AppBar(
+            scrolledUnderElevation: 0,
+            backgroundColor: Colors.transparent,
+            title: const Text('K R I M I N A L'),
+            titleTextStyle: TextStyle(
+                color: context.theme.colorScheme.primary, fontSize: 24),
+            actions: [
+              IconButton(
                   onPressed: () {
-                    final box = GetStorage();
-                    box.erase();
-                    authController.signOut();
+                    ThemeController.toggleThemeMode();
                   },
-                  icon: const Icon(Icons.logout));
-            })
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5, // TODO make dynamic
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Chip(
-                      backgroundColor: context.theme.colorScheme.background,
-                      labelStyle:
-                          TextStyle(color: context.theme.colorScheme.primary),
-                      elevation: 0,
-                      surfaceTintColor: Colors.transparent,
-                      label: const Text('Category'),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                          side: BorderSide(
-                              color: context.theme.colorScheme.secondary)),
+                  icon: Icon(
+                    Icons.lightbulb,
+                    color: context.theme.colorScheme.inversePrimary,
+                  )),
+              GetBuilder<AuthController>(builder: (authController) {
+                return IconButton(
+                    onPressed: () {
+                      final box = GetStorage();
+                      box.erase();
+                      print('before sign out');
+                      authController.signOut();
+                      print('after sign out');
+                    },
+                    icon: const Icon(Icons.logout));
+              })
+            ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 50,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 5, // TODO make dynamic
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Chip(
+                        backgroundColor: context.theme.colorScheme.background,
+                        labelStyle:
+                            TextStyle(color: context.theme.colorScheme.primary),
+                        elevation: 0,
+                        surfaceTintColor: Colors.transparent,
+                        label: const Text('Category'),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                            side: BorderSide(
+                                color: context.theme.colorScheme.secondary)),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: CustomDropDownMenu(
-                      items: dropDownItems,
-                      hintText: 'Sort',
-                      onSelected: (selectedValue) {},
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: CustomDropDownMenu(
+                        items: dropDownItems,
+                        hintText: 'Sort',
+                        onSelected: (selectedValue) {},
+                      ),
                     ),
-                  ),
-                  Flexible(
-                      child: MultiSelectDropDownButton(
-                    items: multiDropDownItems,
-                    onSelectionChanged: (selectedItems) {},
-                  )),
-                ],
-              ),
-              const SizedBox(height: 30),
-              LiquidPullToRefresh(
-                onRefresh: refresh,
-                child: Expanded(
+                    Flexible(
+                        child: MultiSelectDropDownButton(
+                      items: multiDropDownItems,
+                      onSelectionChanged: (selectedItems) {},
+                    )),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                Expanded(
                   child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -127,8 +129,8 @@ class HomeScreen extends StatelessWidget {
                         );
                       }),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

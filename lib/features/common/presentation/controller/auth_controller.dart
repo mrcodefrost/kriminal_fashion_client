@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
-import 'package:kriminal_fashion_client/features/common/presentation/view/screens/login_screen.dart';
 import 'package:otp_text_field_v2/otp_field_v2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/model/client_user_model.dart';
+import '../../domain/usecase/auth_gate.dart';
 
 class AuthController extends GetxController {
   // instances
@@ -142,7 +142,7 @@ class AuthController extends GetxController {
           box.write('loginUser', userData);
           // prefs.setString('loginUser', jsonEncode(userData));
           loginNumberController.clear();
-          Get.to(HomeScreen());
+          Get.off(HomeScreen());
           Get.snackbar('Success', 'Login Successful', colorText: Colors.green);
         } else {
           Get.snackbar('Error', 'User not found, please register',
@@ -158,9 +158,11 @@ class AuthController extends GetxController {
 
   void signOut() async {
     try {
-      await FirebaseAuth.instance.signOut();
+      await firebaseAuth.signOut();
       // Get.off(const LoginScreen());
-      Get.offAll(const LoginScreen());
+      // Get.offAll(const LoginScreen(onTap: onTap));
+      Get.offAll(AuthGate());
+      update();
     } catch (e) {
       debugPrint('Error signing out: $e');
     }

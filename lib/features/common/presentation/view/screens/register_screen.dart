@@ -7,7 +7,9 @@ import 'package:kriminal_fashion_client/features/common/presentation/view/widget
 import 'package:kriminal_fashion_client/utils/validations.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+  const RegisterScreen({super.key, required this.onTap});
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +60,8 @@ class RegisterScreen extends StatelessWidget {
               const SizedBox(height: 20),
               OtpTextField(
                 otpController: authController.otpController,
-                // visible: authController.otpFieldShown.value,
-                visible: true,
+                visible: authController.otpFieldShown.value,
+                // visible: true,
                 onComplete: (code) async {
                   // this returns true or false depending on verification
                   authController.otpVerified = await authController
@@ -92,7 +94,7 @@ class RegisterScreen extends StatelessWidget {
                       : 'Send OTP')),
               TextButton(
                   onPressed: () {
-                    Get.to(const LoginScreen());
+                    Get.to(LoginScreen(onTap: onTap));
                   },
                   child: const Text('Already have an account ? Login')),
             ],

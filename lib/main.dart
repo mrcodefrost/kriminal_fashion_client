@@ -4,12 +4,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/controller/auth_controller.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/controller/product_controller.dart';
-import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
 import 'package:kriminal_fashion_client/firebase_options.dart';
 import 'package:kriminal_fashion_client/themes/dark_mode.dart';
 import 'package:kriminal_fashion_client/themes/light_mode.dart';
 import 'package:kriminal_fashion_client/themes/theme_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'features/common/domain/usecase/auth_gate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: lightMode,
       darkTheme: darkMode,
       themeMode: ThemeController.prefThemeMode(),
-      home: HomeScreen(),
+      home: const AuthGate(),
     );
   }
 }
