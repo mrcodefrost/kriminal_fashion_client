@@ -159,14 +159,20 @@ class AuthController extends GetxController {
   void signOut() async {
     try {
       await firebaseAuth.signOut();
-      // Get.off(const LoginScreen());
-      // Get.offAll(const LoginScreen(onTap: onTap));
-      Get.offAll(AuthGate());
+      Get.offAll(const AuthGate());
       update();
     } catch (e) {
       debugPrint('Error signing out: $e');
     }
   }
+
+  //    Get.offAll(AuthGate()):
+//         This directly creates an instance of AuthGate and navigates to it.
+//         It's similar to instantiating AuthGate directly and then navigating to it.
+//
+//     Get.offAll(() => const AuthGate()):
+//         This uses a callback to lazily create an instance of AuthGate when needed.
+//         It's useful if AuthGate is a stateful widget and you want to create a new instance each time it's navigated to.
 
   // Future<void> autoVerifyOtp() async {
   //   bool isVerified = await verifyOtp(otpController);
