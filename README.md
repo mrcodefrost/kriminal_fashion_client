@@ -54,9 +54,7 @@ Kriminal Fashion App is the customer-facing application for browsing and purchas
 
 If you haven't already, [sign in to your Firebase account](https://firebase.google.com/docs/web/setup).
 Install Firebase CLI globally using IDE Terminal:
- ```bash
-   flutter pub get
- ```
+
 Log in to Firebase
  ```bash
    firebase login
