@@ -14,7 +14,24 @@ import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final List<String> multiDropDownItems = ['item1', 'item2', 'item3'];
+  final List<String> brands = [
+    'Unbranded',
+    'Zara',
+    'Forever 21',
+    'Snitch',
+    'Rare Rabbit',
+    'Only',
+    'Vera Moda',
+    'Van Heusan',
+    'Peter England',
+    'Allen Solly',
+    'Domyos',
+    'Kipsta',
+    'Puma',
+    'Sketchers',
+    'Adidas',
+    'Clarks',
+  ];
   final List<String> dropDownItems = ['Rs. Low to High', 'Rs. High to Low'];
 
   @override
@@ -22,6 +39,8 @@ class HomeScreen extends StatelessWidget {
     return GetBuilder<ProductController>(builder: (productController) {
       Future<void> refresh() async {
         await productController.fetchProducts();
+        Get.snackbar('Success', 'Product list updated successfully',
+            colorText: Colors.green);
       }
 
       return LiquidPullToRefresh(
@@ -48,9 +67,7 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {
                       final box = GetStorage();
                       box.erase();
-                      print('before sign out');
                       authController.signOut();
-                      print('after sign out');
                     },
                     icon: const Icon(Icons.logout));
               })
@@ -64,20 +81,29 @@ class HomeScreen extends StatelessWidget {
                   height: 50,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 5, // TODO make dynamic
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Chip(
-                        backgroundColor: context.theme.colorScheme.background,
-                        labelStyle:
-                            TextStyle(color: context.theme.colorScheme.primary),
-                        elevation: 0,
-                        surfaceTintColor: Colors.transparent,
-                        label: const Text('Category'),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero,
-                            side: BorderSide(
-                                color: context.theme.colorScheme.secondary)),
+                    itemCount: productController.productCategories.length,
+                    itemBuilder: (context, index) => InkWell(
+                      onTap: () {
+                        productController.filterByCategory(
+                            productController.productCategories[index].name ??
+                                'Error');
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Chip(
+                          backgroundColor: context.theme.colorScheme.background,
+                          labelStyle: TextStyle(
+                              color: context.theme.colorScheme.primary),
+                          elevation: 0,
+                          surfaceTintColor: Colors.transparent,
+                          label: Text(
+                              productController.productCategories[index].name ??
+                                  'Error'),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.zero,
+                              side: BorderSide(
+                                  color: context.theme.colorScheme.secondary)),
+                        ),
                       ),
                     ),
                   ),
@@ -89,13 +115,21 @@ class HomeScreen extends StatelessWidget {
                       child: CustomDropDownMenu(
                         items: dropDownItems,
                         hintText: 'Sort',
-                        onSelected: (selectedValue) {},
+                        onSelected: (selectedValue) {
+                          productController.sortByPrice(
+                              // selectedValue == 'Rs. Low to High'
+                              ascending: selectedValue == dropDownItems[0]
+                                  ? true
+                                  : false);
+                        },
                       ),
                     ),
                     Flexible(
                         child: MultiSelectDropDownButton(
-                      items: multiDropDownItems,
-                      onSelectionChanged: (selectedItems) {},
+                      items: brands,
+                      onSelectionChanged: (selectedItems) {
+                        productController.filterByBrand(selectedItems);
+                      },
                     )),
                   ],
                 ),
@@ -107,15 +141,18 @@ class HomeScreen extends StatelessWidget {
                           crossAxisSpacing: 8,
                           childAspectRatio: 0.45,
                           mainAxisSpacing: 8),
-                      itemCount: productController.products.length,
+                      itemCount: productController.filteredProducts.length,
                       itemBuilder: (context, index) {
                         return ProductCard(
-                          name: productController.products[index].name ??
-                              'No Name',
-                          price: productController.products[index].price ?? 0.0,
-                          offerTag:
-                              productController.products[index].shortTag ??
-                                  'No Tags',
+                          name:
+                              productController.filteredProducts[index].name ??
+                                  'No Name',
+                          price:
+                              productController.filteredProducts[index].price ??
+                                  0.0,
+                          offerTag: productController
+                                  .filteredProducts[index].shortTag ??
+                              'No Tags',
                           onTap: () {
                             Navigator.push(
                                 context,
@@ -123,8 +160,9 @@ class HomeScreen extends StatelessWidget {
                                     builder: (context) =>
                                         ProductDescriptionScreen()));
                           },
-                          imageURL: productController.products[index].image ??
-                              AppImages.demoImageURL,
+                          imageURL:
+                              productController.filteredProducts[index].image ??
+                                  AppImages.demoImageURL,
                           index: index,
                         );
                       }),

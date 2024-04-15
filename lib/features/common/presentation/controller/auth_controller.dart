@@ -36,7 +36,7 @@ class AuthController extends GetxController {
   @override
   void onReady() {
     // TODO: implement onReady
-
+    // see the shared preferences approach
     Map<String, dynamic>? user = box.read('loginUser');
     if (user != null) {
       loginUser = ClientUser.fromJson(user);
@@ -65,7 +65,6 @@ class AuthController extends GetxController {
         name: registerNameController.text,
         number: int.parse(registerNumberController.text),
       );
-
       final clientUserJson = clientUser.toJson();
       doc.set(clientUserJson);
       Get.snackbar('Success', 'User added successfully',
