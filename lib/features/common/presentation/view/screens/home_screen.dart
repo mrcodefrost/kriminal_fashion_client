@@ -155,7 +155,7 @@ class HomeScreen extends StatelessWidget {
                                   .filteredProducts[index].shortTag ??
                               'No Tags',
                           onTap: () {
-                            Get.to(ProductDescriptionScreen(), arguments: {
+                            Get.to(const ProductDescriptionScreen(), arguments: {
                               'data': productController.filteredProducts[index]
                             });
                           },

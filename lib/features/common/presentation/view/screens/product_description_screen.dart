@@ -23,7 +23,7 @@ class ProductDescriptionScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               product.name!,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -31,14 +31,14 @@ class ProductDescriptionScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               product.description!,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
               ),
             ),
             const SizedBox(height: 20),
             Text(
-              '${product.price!}',
-              style: TextStyle(
+              'Rs. ${product.price!.toStringAsFixed(2)}',
+              style: const TextStyle(
                 fontSize: 24,
               ),
             ),

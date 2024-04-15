@@ -37,7 +37,7 @@ class ProductController extends GetxController {
       filteredProducts.assignAll(products);
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
-      print(e.toString());
+      debugPrint(e.toString());
     } finally {
       // super important - always call update() in such cases of statelessness
       // basically any change in UI
@@ -57,7 +57,7 @@ class ProductController extends GetxController {
       productCategories.assignAll(retrievedCategories);
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
-      print(e.toString());
+      debugPrint(e.toString());
     } finally {
       // super important - always call update() in such cases of statelessness
       update();
