@@ -136,11 +136,12 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 30),
                 Expanded(
                   child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8,
-                          childAspectRatio: 0.45,
-                          mainAxisSpacing: 8),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 8,
+                              childAspectRatio: 0.45,
+                              mainAxisSpacing: 8),
                       itemCount: productController.filteredProducts.length,
                       itemBuilder: (context, index) {
                         return ProductCard(
@@ -154,11 +155,9 @@ class HomeScreen extends StatelessWidget {
                                   .filteredProducts[index].shortTag ??
                               'No Tags',
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        ProductDescriptionScreen()));
+                            Get.to(ProductDescriptionScreen(), arguments: {
+                              'data': productController.filteredProducts[index]
+                            });
                           },
                           imageURL:
                               productController.filteredProducts[index].image ??

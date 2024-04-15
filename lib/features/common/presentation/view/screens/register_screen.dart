@@ -21,7 +21,7 @@ class RegisterScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Create a new account'),
+              const Text('Create a new account'),
               const SizedBox(height: 20),
               TextField(
                 controller: authController.registerNameController,
