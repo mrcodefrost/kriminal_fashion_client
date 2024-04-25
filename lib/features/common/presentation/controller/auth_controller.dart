@@ -40,7 +40,7 @@ class AuthController extends GetxController {
     Map<String, dynamic>? user = box.read('loginUser');
     if (user != null) {
       loginUser = ClientUser.fromJson(user);
-      Get.to(HomeScreen());
+      Get.off(const AuthGate());
     }
     super.onReady();
   }
