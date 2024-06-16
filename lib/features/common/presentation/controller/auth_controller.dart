@@ -22,6 +22,8 @@ class AuthController extends GetxController {
   TextEditingController registerNameController = TextEditingController();
   TextEditingController registerNumberController = TextEditingController();
   TextEditingController loginNumberController = TextEditingController();
+  TextEditingController registerEmailController = TextEditingController();
+  TextEditingController loginEmailController = TextEditingController();
 
   // OTP related
   OtpFieldControllerV2 otpController = OtpFieldControllerV2();
@@ -54,6 +56,7 @@ class AuthController extends GetxController {
   void clearAllControllers() {
     registerNumberController.clear();
     registerNameController.clear();
+    registerEmailController.clear();
     otpController.clear();
   }
 
@@ -64,6 +67,7 @@ class AuthController extends GetxController {
         id: doc.id,
         name: registerNameController.text,
         number: int.parse(registerNumberController.text),
+        email: registerEmailController.text,
       );
       final clientUserJson = clientUser.toJson();
       doc.set(clientUserJson);
@@ -141,6 +145,34 @@ class AuthController extends GetxController {
           box.write('loginUser', userData);
           // prefs.setString('loginUser', jsonEncode(userData));
           loginNumberController.clear();
+          Get.off(HomeScreen());
+          Get.snackbar('Success', 'Login Successful', colorText: Colors.green);
+        } else {
+          Get.snackbar('Error', 'User not found, please register',
+              colorText: Colors.red);
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    } finally {
+      update();
+    }
+  }
+
+  Future<void> loginWithEmail() async {
+    try {
+      String email = loginEmailController.text;
+      if (email.isNotEmpty) {
+        var querySnapshot = await userCollection
+            .where('email', isEqualTo: loginEmailController.text)
+            .limit(1)
+            .get();
+        if (querySnapshot.docs.isNotEmpty) {
+          var userDoc = querySnapshot.docs.first;
+          var userData = userDoc.data() as Map<String, dynamic>;
+          box.write('loginUser', userData);
+          // prefs.setString('loginUser', jsonEncode(userData));
+          loginEmailController.clear();
           Get.off(HomeScreen());
           Get.snackbar('Success', 'Login Successful', colorText: Colors.green);
         } else {

@@ -29,16 +29,28 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
+              // TextField(
+              //   controller: authController.loginNumberController,
+              //   keyboardType: TextInputType.phone,
+              //   decoration: InputDecoration(
+              //     border: OutlineInputBorder(
+              //       borderRadius: BorderRadius.circular(12),
+              //     ),
+              //     prefixIcon: const Icon(Icons.phone_android),
+              //     labelText: 'Mobile Number',
+              //     hintText: 'Enter your mobile number',
+              //   ),
+              // ),
               TextField(
-                controller: authController.loginNumberController,
-                keyboardType: TextInputType.phone,
+                controller: authController.loginEmailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                   prefixIcon: const Icon(Icons.phone_android),
-                  labelText: 'Mobile Number',
-                  hintText: 'Enter your mobile number',
+                  labelText: 'Email Address',
+                  hintText: 'Enter your email address',
                 ),
               ),
               const SizedBox(
@@ -46,7 +58,8 @@ class LoginScreen extends StatelessWidget {
               ),
               ElevatedButton(
                   onPressed: () {
-                    authController.loginWithPhone(); // logins without password
+                    // authController.loginWithPhone(); // logins without password
+                    authController.loginWithEmail();
                   },
                   style: ElevatedButton.styleFrom(
                       foregroundColor: context.theme.colorScheme.inversePrimary,

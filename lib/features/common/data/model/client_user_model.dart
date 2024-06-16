@@ -13,10 +13,14 @@ class ClientUser {
   @JsonKey(name: "number")
   int? number;
 
+  @JsonKey(name: "email")
+  String? email;
+
   ClientUser({
     this.id,
     this.name,
     this.number,
+    this.email,
   });
 
   factory ClientUser.fromJson(Map<String, dynamic> json) =>
