@@ -10,7 +10,9 @@ class ProductDescriptionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Product product = Get.arguments['data'];
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(

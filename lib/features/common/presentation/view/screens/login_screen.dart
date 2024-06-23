@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/controller/auth_controller.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/screens/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -72,6 +73,13 @@ class LoginScreen extends StatelessWidget {
                     ));
                   },
                   child: const Text('Register new account')),
+
+              const SizedBox(height: 20),
+              ElevatedButton(
+                  onPressed: () {
+                    Get.offAll(HomeScreen());
+                  },
+                  child: Text('Quick Sign In'))
             ],
           ),
         ),
