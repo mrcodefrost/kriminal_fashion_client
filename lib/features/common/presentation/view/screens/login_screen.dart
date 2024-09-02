@@ -4,10 +4,14 @@ import 'package:kriminal_fashion_client/features/common/presentation/controller/
 import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/screens/register_screen.dart';
 
+import '../../../../../utils/validations.dart';
+
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key, required this.onTap});
+  LoginScreen({super.key, required this.onTap});
 
   final VoidCallback onTap;
+
+  final _loginFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,71 +20,88 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: context.theme.colorScheme.background,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Welcome Back!',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: context.theme.colorScheme.primary,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              // TextField(
-              //   controller: authController.loginNumberController,
-              //   keyboardType: TextInputType.phone,
-              //   decoration: InputDecoration(
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(12),
-              //     ),
-              //     prefixIcon: const Icon(Icons.phone_android),
-              //     labelText: 'Mobile Number',
-              //     hintText: 'Enter your mobile number',
-              //   ),
-              // ),
-              TextField(
-                controller: authController.loginEmailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+          child: Form(
+            key: _loginFormKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Welcome Back!',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: context.theme.colorScheme.primary,
                   ),
-                  prefixIcon: const Icon(Icons.phone_android),
-                  labelText: 'Email Address',
-                  hintText: 'Enter your email address',
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    // authController.loginWithPhone(); // logins without password
-                    authController.loginWithEmail();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      foregroundColor: context.theme.colorScheme.inversePrimary,
-                      backgroundColor: context.theme.colorScheme.primary),
-                  child: const Text('Login')),
-              TextButton(
-                  onPressed: () {
-                    Get.to(RegisterScreen(
-                      onTap: onTap,
-                    ));
-                  },
-                  child: const Text('Register new account')),
-
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  onPressed: () {
-                    Get.offAll(HomeScreen());
-                  },
-                  child: Text('Quick Sign In'))
-            ],
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: authController.loginEmailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    prefixIcon: const Icon(Icons.phone_android),
+                    labelText: 'Email Address',
+                    hintText: 'Enter your email address',
+                  ),
+                  inputFormatters: [
+                    InputFormatter.trimSpaces(),
+                    InputFormatter.emptyValidator(),
+                  ],
+                  validator: Validations.isTouchedEmailValidator,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: authController.loginPasswordController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    prefixIcon: const Icon(Icons.password),
+                    labelText: 'Password',
+                    hintText: 'Enter your password',
+                  ),
+                  inputFormatters: [
+                    InputFormatter.trimSpaces(),
+                    InputFormatter.emptyValidator(),
+                  ],
+                  validator: Validations.isEmptyValidator,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      // authController.loginWithPhone(); // logins without password
+                      if (_loginFormKey.currentState!.validate()) {
+                        authController.loginWithEmail();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        foregroundColor: context.theme.colorScheme.inversePrimary,
+                        backgroundColor: context.theme.colorScheme.primary),
+                    child: const Text('Login')),
+                TextButton(
+                    onPressed: () {
+                      Get.to(RegisterScreen(
+                        onTap: onTap,
+                      ));
+                    },
+                    child: const Text('Register new account')),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                    onPressed: () {
+                      Get.offAll(HomeScreen());
+                    },
+                    child: Text('Quick Sign In'))
+              ],
+            ),
           ),
         ),
       );

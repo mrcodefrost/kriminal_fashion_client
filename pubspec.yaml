@@ -44,8 +44,10 @@ dependencies:
   json_annotation: ^4.8.1
   liquid_pull_to_refresh: ^3.0.1
   otp_text_field_v2: ^1.0.3
-  firebase_auth: ^4.19.1
+  firebase_auth: ^4.20.0
   get_storage: ^2.1.1
+  logger: ^2.4.0
+  flutter_native_splash: ^2.4.1
 
 dev_dependencies:
   json_serializable : ^6.7.1
@@ -101,3 +103,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+#flutter_native_splash:
+#  image: assets/images/splash.png
+#  color: "#0xFFFFFF"
+#  android_disable_fullscreen: true
