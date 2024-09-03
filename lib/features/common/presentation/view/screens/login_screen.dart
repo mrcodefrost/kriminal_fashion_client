@@ -99,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {
                       Get.offAll(HomeScreen());
                     },
-                    child: Text('Quick Sign In'))
+                    child: const Text('Quick Sign In')),
               ],
             ),
           ),
