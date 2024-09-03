@@ -104,7 +104,8 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 
-#flutter_native_splash:
-#  image: assets/images/splash.png
-#  color: "#0xFFFFFF"
+flutter_native_splash:
+  image: assets/images/splash.png
+  color: "#0xFFFFFF"
 #  android_disable_fullscreen: true
+# run the commmand dart run flutter_native_splash:create
