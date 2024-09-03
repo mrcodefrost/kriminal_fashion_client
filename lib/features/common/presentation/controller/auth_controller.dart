@@ -27,12 +27,6 @@ class AuthController extends GetxController {
   TextEditingController loginEmailController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();
 
-  // OTP related
-  OtpFieldControllerV2 otpController = OtpFieldControllerV2();
-  RxBool otpFieldShown = false.obs;
-  var verificationId = ''.obs;
-  bool otpVerified = false;
-
   // Get storage user
   ClientUser? loginUser;
 
@@ -58,7 +52,6 @@ class AuthController extends GetxController {
     registerNumberController.clear();
     registerNameController.clear();
     registerEmailController.clear();
-    otpController.clear();
   }
 
   void clearLoginControllers() {
