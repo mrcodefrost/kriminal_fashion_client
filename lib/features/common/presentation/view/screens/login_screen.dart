@@ -25,11 +25,17 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const Spacer(),
+                const Text(
+                  'KRIMINAL',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 12),
+                ),
+                const Spacer(),
                 Text(
                   'Welcome Back!',
                   style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 23,
+                    fontWeight: FontWeight.w400,
                     color: context.theme.colorScheme.primary,
                   ),
                 ),
@@ -100,6 +106,7 @@ class LoginScreen extends StatelessWidget {
                       Get.offAll(HomeScreen());
                     },
                     child: const Text('Quick Sign In')),
+                const Spacer(),
               ],
             ),
           ),

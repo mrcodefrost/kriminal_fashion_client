@@ -24,6 +24,12 @@ class RegisterScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const Spacer(),
+                const Text(
+                  'KRIMINAL',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 12),
+                ),
+                const Spacer(),
                 const Text('Create a new account'),
                 const SizedBox(height: 20),
                 TextFormField(
@@ -100,40 +106,6 @@ class RegisterScreen extends StatelessWidget {
                   validator: Validations.isEmptyValidator,
                 ),
                 const SizedBox(height: 20),
-                // OtpTextField(
-                //   otpController: authController.otpController,
-                //   visible: authController.otpFieldShown.value,
-                //   // visible: true,
-                //   onComplete: (code) async {
-                //     // this returns true or false depending on verification
-                //     authController.otpVerified = await authController
-                //         .verifyOtp(code ?? '0000'); // this verifies otp
-                //
-                //     if (authController.otpVerified) {
-                //       authController.addUser();
-                //       Get.to(HomeScreen());
-                //     } else {
-                //       Get.snackbar('Error', 'Incorrect OTP');
-                //     }
-                //   },
-                // ),
-                // const SizedBox(height: 20),
-                // ElevatedButton(
-                //     onPressed: () {
-                //       if (authController.otpFieldShown.value) {
-                //         // authController.addUser();
-                //       } else {
-                //         authController.otpAuthentication(); // this sends the otp
-                //         authController.otpFieldShown = true.obs;
-                //       }
-                //     },
-                //     style: ElevatedButton.styleFrom(
-                //       foregroundColor: context.theme.colorScheme.inversePrimary,
-                //       backgroundColor: context.theme.colorScheme.primary,
-                //     ),
-                //     child: Text(authController.otpFieldShown.value
-                //         ? 'Register'
-                //         : 'Send OTP')),
                 ElevatedButton(
                     onPressed: () {
                       if (_registerFormKey.currentState!.validate()) {
@@ -150,6 +122,7 @@ class RegisterScreen extends StatelessWidget {
                       Get.to(LoginScreen(onTap: onTap));
                     },
                     child: const Text('Already have an account ? Login')),
+                const Spacer(),
               ],
             ),
           ),
