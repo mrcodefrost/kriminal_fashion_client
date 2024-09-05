@@ -81,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                        foregroundColor: context.theme.colorScheme.inversePrimary,
+                        foregroundColor: context.theme.colorScheme.tertiary,
                         backgroundColor: context.theme.colorScheme.primary),
                     child: const Text('Login')),
                 TextButton(
@@ -90,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                         onTap: onTap,
                       ));
                     },
-                    child: const Text('Register new account')),
+                    child: const Text('Don\'t have an account? Register')),
                 const SizedBox(height: 20),
                 ElevatedButton(
                     onPressed: () {

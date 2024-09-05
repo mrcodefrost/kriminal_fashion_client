@@ -93,7 +93,7 @@ class RegisterScreen extends StatelessWidget {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: context.theme.colorScheme.inversePrimary,
+                      foregroundColor: context.theme.colorScheme.tertiary,
                       backgroundColor: context.theme.colorScheme.primary,
                     ),
                     child: const Text('Register')),
