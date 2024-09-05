@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:kriminal_fashion_client/features/common/presentation/controller/auth_controller.dart';
+import 'package:kriminal_fashion_client/features/auth/presentation/controller/auth_controller.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/controller/product_controller.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/screens/product_description_screen.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/custom_drop_down_menu.dart';
@@ -39,20 +39,17 @@ class HomeScreen extends StatelessWidget {
     return GetBuilder<ProductController>(builder: (productController) {
       Future<void> refresh() async {
         await productController.fetchProducts();
-        Get.snackbar('Success', 'Product list updated successfully',
-            colorText: Colors.green);
+        Get.snackbar('Success', 'Product list updated successfully', colorText: Colors.green);
       }
 
       return LiquidPullToRefresh(
         onRefresh: refresh,
         child: Scaffold(
-          backgroundColor: context.theme.colorScheme.background,
           appBar: AppBar(
             scrolledUnderElevation: 0,
             backgroundColor: Colors.transparent,
             title: const Text('K R I M I N A L'),
-            titleTextStyle: TextStyle(
-                color: context.theme.colorScheme.primary, fontSize: 24),
+            titleTextStyle: TextStyle(color: context.theme.colorScheme.primary, fontSize: 24),
             actions: [
               IconButton(
                   onPressed: () {
@@ -84,25 +81,19 @@ class HomeScreen extends StatelessWidget {
                     itemCount: productController.productCategories.length,
                     itemBuilder: (context, index) => InkWell(
                       onTap: () {
-                        productController.filterByCategory(
-                            productController.productCategories[index].name ??
-                                'Error');
+                        productController.filterByCategory(productController.productCategories[index].name ?? 'Error');
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Chip(
-                          backgroundColor: context.theme.colorScheme.background,
-                          labelStyle: TextStyle(
-                              color: context.theme.colorScheme.primary),
+                          backgroundColor: context.theme.colorScheme.surface,
+                          labelStyle: TextStyle(color: context.theme.colorScheme.primary),
                           elevation: 0,
                           surfaceTintColor: Colors.transparent,
-                          label: Text(
-                              productController.productCategories[index].name ??
-                                  'Error'),
+                          label: Text(productController.productCategories[index].name ?? 'Error'),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
-                              side: BorderSide(
-                                  color: context.theme.colorScheme.secondary)),
+                              side: BorderSide(color: context.theme.colorScheme.secondary)),
                         ),
                       ),
                     ),
@@ -118,9 +109,7 @@ class HomeScreen extends StatelessWidget {
                         onSelected: (selectedValue) {
                           productController.sortByPrice(
                               // selectedValue == 'Rs. Low to High'
-                              ascending: selectedValue == dropDownItems[0]
-                                  ? true
-                                  : false);
+                              ascending: selectedValue == dropDownItems[0] ? true : false);
                         },
                       ),
                     ),
@@ -136,32 +125,19 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 30),
                 Expanded(
                   child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 8,
-                              childAspectRatio: 0.45,
-                              mainAxisSpacing: 8),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, crossAxisSpacing: 8, childAspectRatio: 0.45, mainAxisSpacing: 8),
                       itemCount: productController.filteredProducts.length,
                       itemBuilder: (context, index) {
                         return ProductCard(
-                          name:
-                              productController.filteredProducts[index].name ??
-                                  'No Name',
-                          price:
-                              productController.filteredProducts[index].price ??
-                                  0.0,
-                          offerTag: productController
-                                  .filteredProducts[index].shortTag ??
-                              'No Tags',
+                          name: productController.filteredProducts[index].name ?? 'No Name',
+                          price: productController.filteredProducts[index].price ?? 0.0,
+                          offerTag: productController.filteredProducts[index].shortTag ?? 'No Tags',
                           onTap: () {
-                            Get.to(const ProductDescriptionScreen(), arguments: {
-                              'data': productController.filteredProducts[index]
-                            });
+                            Get.to(const ProductDescriptionScreen(),
+                                arguments: {'data': productController.filteredProducts[index]});
                           },
-                          imageURL:
-                              productController.filteredProducts[index].image ??
-                                  AppImages.demoImageURL,
+                          imageURL: productController.filteredProducts[index].image ?? AppImages.demoImageURL,
                           index: index,
                         );
                       }),

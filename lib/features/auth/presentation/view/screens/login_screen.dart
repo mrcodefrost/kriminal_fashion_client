@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kriminal_fashion_client/features/common/presentation/controller/auth_controller.dart';
+import 'package:kriminal_fashion_client/features/auth/presentation/controller/auth_controller.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
-import 'package:kriminal_fashion_client/features/common/presentation/view/screens/register_screen.dart';
+import 'package:kriminal_fashion_client/features/auth/presentation/view/screens/register_screen.dart';
 
 import '../../../../../utils/validations.dart';
+import '../../../../common/presentation/view/widgets/custom_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key, required this.onTap});
@@ -17,7 +18,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(builder: (authController) {
       return Scaffold(
-        backgroundColor: context.theme.colorScheme.background,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Form(
@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  'Welcome Back!',
+                  'Welcome back !',
                   style: TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.w400,
@@ -42,17 +42,13 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                TextFormField(
+                // User login
+                CustomTextField(
                   controller: authController.loginEmailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    prefixIcon: const Icon(Icons.phone_android),
-                    labelText: 'Email Address',
-                    hintText: 'Enter your email address',
-                  ),
+                  prefixIcon: const Icon(Icons.email),
+                  labelText: 'Email Address',
+                  hintText: 'Enter your email address',
                   inputFormatters: [
                     InputFormatter.trimSpaces(),
                     InputFormatter.emptyValidator(),
@@ -62,26 +58,21 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                TextFormField(
+                // User password
+                CustomTextField(
                   controller: authController.loginPasswordController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    prefixIcon: const Icon(Icons.password),
-                    labelText: 'Password',
-                    hintText: 'Enter your password',
-                  ),
+                  obscureText: true,
+                  keyboardType: TextInputType.visiblePassword,
+                  prefixIcon: const Icon(Icons.password),
+                  labelText: 'Password',
+                  hintText: 'Enter your password',
                   inputFormatters: [
                     InputFormatter.trimSpaces(),
                     InputFormatter.emptyValidator(),
                   ],
                   validator: Validations.isEmptyValidator,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 ElevatedButton(
                     onPressed: () {
                       // authController.loginWithPhone(); // logins without password
@@ -95,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                     child: const Text('Login')),
                 TextButton(
                     onPressed: () {
-                      Get.to(RegisterScreen(
+                      Get.offAll(RegisterScreen(
                         onTap: onTap,
                       ));
                     },

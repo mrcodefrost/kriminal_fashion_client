@@ -3,12 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
-import 'package:otp_text_field_v2/otp_field_v2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/globals.dart';
-import '../../data/model/client_user_model.dart';
+import '../../../common/data/model/client_user_model.dart';
 import '../../domain/usecase/auth_gate.dart';
 
 class AuthController extends GetxController {

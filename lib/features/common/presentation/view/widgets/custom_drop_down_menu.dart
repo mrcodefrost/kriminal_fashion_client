@@ -15,19 +15,14 @@ class CustomDropDownMenu extends StatelessWidget {
     }).toList();
   }
 
-  const CustomDropDownMenu(
-      {super.key,
-      required this.items,
-      this.onSelected,
-      required this.hintText});
+  const CustomDropDownMenu({super.key, required this.items, this.onSelected, required this.hintText});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         // Use BoxDecoration for border and background
-        border: Border.all(
-            color: context.theme.colorScheme.secondary), // Border on all sides
+        border: Border.all(color: context.theme.colorScheme.secondary), // Border on all sides
         borderRadius: BorderRadius.zero, // Adjust border radius as needed
         color: Colors.transparent,
       ),
@@ -41,10 +36,8 @@ class CustomDropDownMenu extends StatelessWidget {
           enabledBorder: InputBorder.none,
         ),
         menuStyle: MenuStyle(
-          backgroundColor: MaterialStatePropertyAll<Color>(
-              context.theme.colorScheme.tertiary),
-          elevation: MaterialStateProperty.all<double>(
-              0.0), // more explicit than using propertyAll
+          backgroundColor: WidgetStatePropertyAll<Color>(context.theme.colorScheme.tertiary),
+          elevation: WidgetStateProperty.all<double>(0.0), // more explicit than using propertyAll
         ),
       ),
     );

@@ -10,76 +10,27 @@ ThemeData lightMode = ThemeData(
     secondary: Color(0xff252323), // 4th
     inversePrimary: Color(0xff70798c), // darkest
   ),
-  // inputDecorationTheme: InputDecorationTheme(
-  //   errorStyle: const TextStyle(
-  //     color: Colors.red,
-  //     fontSize: 12,
-  //   ),
-  //   errorMaxLines: 4,
-  //   fillColor: Colors.transparent,
-  //   contentPadding: EdgeInsets.all(10),
-  //   // normal state = enabledBorder
-  //   enabledBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(12),
-  //     borderSide: const BorderSide(
-  //       color: Colors.pink,
-  //       width: 0.5,
-  //     ),
-  //   ),
-  //   // border: OutlineInputBorder(
-  //   //   borderRadius: BorderRadius.circular(12),
-  //   //   borderSide: const BorderSide(
-  //   //     color: Colors.cyan,
-  //   //     width: 0.5,
-  //   //   ),
-  //   // ), // no
-  //   focusedBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(12),
-  //     borderSide: const BorderSide(
-  //       color: Colors.blue,
-  //       width: 0.5,
-  //     ),
-  //   ),
-  //   errorBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(12),
-  //     borderSide: const BorderSide(
-  //       color: Colors.yellow,
-  //       width: 0.5,
-  //     ),
-  //   ),
-  //   focusedErrorBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(12),
-  //     borderSide: const BorderSide(
-  //       color: Colors.green,
-  //       width: 0.5,
-  //     ),
-  //   ),
-  //   // disabledBorder: OutlineInputBorder(
-  //   //       borderRadius: BorderRadius.circular(12.fSize),
-  //   //       borderSide: const BorderSide(
-  //   //             color: BorderColor.lightGrey,
-  //   //             width: 0.5,
-  //   //       ),
-  //   // ),
-  //   // focusedBorder: OutlineInputBorder(
-  //   //       borderRadius: BorderRadius.circular(12.fSize),
-  //   //       borderSide: const BorderSide(
-  //   //             color: BorderColor.orange,
-  //   //       ),
-  //   // ),
-  //   // errorBorder: OutlineInputBorder(
-  //   //       borderSide: const BorderSide(
-  //   //             color: ErrorColor.red,
-  //   //       ),
-  //   //       borderRadius: BorderRadius.circular(12.fSize),
-  //   // ),
-  //   // focusedErrorBorder: OutlineInputBorder(
-  //   //       borderSide: const BorderSide(
-  //   //             color: ErrorColor.red,
-  //   //       ),
-  //   //       borderRadius: BorderRadius.circular(12.fSize),
-  //   // ),
-  // ),
+  scaffoldBackgroundColor: const Color(0xffFAFAFF),
+  inputDecorationTheme: InputDecorationTheme(
+    errorStyle: const TextStyle(
+      color: Colors.red,
+      fontSize: 12,
+    ),
+    errorMaxLines: 4,
+    fillColor: Colors.transparent,
+    contentPadding: const EdgeInsets.all(10),
+    // normal state = enabledBorder
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(
+        color: Color(0xff252323),
+        width: 2,
+      ),
+    ),
+  ),
 );
 
 // ThemeData updateTheme = ThemeData(

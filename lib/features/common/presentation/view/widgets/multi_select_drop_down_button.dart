@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MultiSelectDropDownButton extends StatelessWidget {
-  MultiSelectDropDownButton(
-      {super.key, required this.items, required this.onSelectionChanged});
+  MultiSelectDropDownButton({super.key, required this.items, required this.onSelectionChanged});
 
   final List<String> items;
   final Function(List<String>) onSelectionChanged;
-  List<String> selectedItems = [];
+  final List<String> selectedItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +31,7 @@ class MultiSelectDropDownButton extends StatelessWidget {
               final isSelected = selectedItems.contains(item);
               return InkWell(
                 onTap: () {
-                  isSelected
-                      ? selectedItems.remove(item)
-                      : selectedItems.add(item);
+                  isSelected ? selectedItems.remove(item) : selectedItems.add(item);
                   onSelectionChanged(selectedItems);
                   menuSetState(() {});
                 },
@@ -93,9 +90,8 @@ class MultiSelectDropDownButton extends StatelessWidget {
           height: 60,
           width: 130,
           elevation: 0,
-          decoration: BoxDecoration(
-              color: Colors.transparent,
-              border: Border.all(color: context.theme.colorScheme.secondary))),
+          decoration:
+              BoxDecoration(color: Colors.transparent, border: Border.all(color: context.theme.colorScheme.secondary))),
       menuItemStyleData: const MenuItemStyleData(
         height: 60,
         padding: EdgeInsets.zero,
