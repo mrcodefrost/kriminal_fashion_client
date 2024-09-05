@@ -93,9 +93,7 @@ Activate Flutterfire CLI
 ```
 
 3. If you encounter the error ' error: cannot find symbol MultiDex.install(this)' then delete the 'FlutterMultiDexApplication'
-
-Issue is caused if the Multidex is activated before migrating to Flutter 3.22.
-This is a reported [bug](https://github.com/flutter/flutter/issues/148368) in Flutter (v 3.22). It will be fixed in 3.23 release.
+    Issue is caused if the Multidex is activated before migrating to Flutter 3.22. This is a reported [bug](https://github.com/flutter/flutter/issues/148368) in Flutter (v 3.22). It will be fixed in 3.23 release.
 
 
 ### License
