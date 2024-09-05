@@ -4,6 +4,17 @@
 
 Kriminal Fashion App is the customer-facing application for browsing and purchasing high-quality fashion items from the Kriminal brand. This app provides a seamless shopping experience for users, allowing them to browse products, add them to their cart, and make purchases securely.
 
+<div style="
+  display: flex;
+  justify-content: space-between;
+  ">
+ <img src = "https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/repo%20resources/1.jpg?raw=true" width="250"/>
+ <img src = "https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/repo%20resources/2.jpg?raw=true" width="250"/>
+ <img src = "https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/repo%20resources/3.jpg?raw=true" width="250"/>
+ <img src = "https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/repo%20resources/4.jpg?raw=true" width="250"/>
+ <img src = "https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/repo%20resources/5.jpg?raw=true" width="250"/>
+</div>
+
 ### Features
 
 - **Product Catalog:** Browse high-quality fashion items from the Kriminal brand.
