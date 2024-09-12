@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kriminal_fashion_client/features/stripe_payment/domain/service/stripe_service.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/screens/payment_options_screen.dart';
 
 import '../../../data/model/product.dart';
 
@@ -71,9 +71,10 @@ class ProductDescriptionScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  // Get.snackbar('Sorry !', 'Functionality under developement',
+                  // Get.snackbar('Sorry !', 'Functionality under development',
                   //    colorText: Colors.red);
-                  StripeService.instance.makePayment();
+                  // StripeService.instance.makePayment();
+                  Get.to(() => PaymentOptionsScreen());
                 },
               ),
             ),

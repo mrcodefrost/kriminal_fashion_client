@@ -28,7 +28,8 @@ Future<void> _setup() async {
   Get.put(prefs);
   Get.put(AuthController());
   Get.put(ProductController());
-  Stripe.publishableKey = AppSecrets.stripePublishableKey;
+  // TODO uncomment for stripe
+  // Stripe.publishableKey = AppSecrets.stripePublishableKey;
 }
 
 class MyApp extends StatelessWidget {
