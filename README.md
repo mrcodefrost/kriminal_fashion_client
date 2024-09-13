@@ -76,19 +76,6 @@ Activate Flutterfire CLI
    flutter pub global activate flutterfire_cli
  ```
 
-
-5. Generate Model files by running this command
-
- ```bash
-  dart run build_runner build --delete-conflicting-outputs
- ```
-
-6. You can delete the model files if required by running this command
-
- ```bash
-  dart run build_runner build clean
- ```
-
 ### Configuration
 
 1. Create a `firebase.json` file in the root directory of your project

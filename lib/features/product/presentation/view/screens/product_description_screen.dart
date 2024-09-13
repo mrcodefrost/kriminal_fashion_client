@@ -9,7 +9,7 @@ class ProductDescriptionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Product product = Get.arguments['data'];
+    ProductModel product = Get.arguments['data'];
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
@@ -46,16 +46,20 @@ class ProductDescriptionScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // TextField(
-            //   maxLines: 3,
-            //   decoration: InputDecoration(
-            //     border: OutlineInputBorder(
-            //       borderRadius: BorderRadius.circular(12),
-            //     ),
-            //     labelText: 'Enter your address',
-            //   ),
-            // ),
-            // const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: context.theme.colorScheme.primary,
+                    //     shape: RoundedRectangleBorder(
+                    //   borderRadius: BorderRadius.circular(0),
+                    // ),
+                    // todo
+                    shape: StarBorder()),
+                onPressed: () {},
+                child: Text('Add to Cart'),
+              ),
+            ),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -74,7 +78,7 @@ class ProductDescriptionScreen extends StatelessWidget {
                   // Get.snackbar('Sorry !', 'Functionality under development',
                   //    colorText: Colors.red);
                   // StripeService.instance.makePayment();
-                  Get.to(() => PaymentOptionsScreen());
+                  Get.to(() => const PaymentOptionsScreen());
                 },
               ),
             ),
