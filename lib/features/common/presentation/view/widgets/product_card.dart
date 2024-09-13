@@ -36,7 +36,7 @@ class ProductCard extends StatelessWidget {
           border: Border(
             // bottom: const BorderSide(color: Colors.black, width: 1),
             right: _isRightBorder(index)
-                ? const BorderSide(color: Colors.black, width: 1)
+                ? BorderSide(color: Theme.of(context).colorScheme.secondary, width: 1)
                 : BorderSide.none,
           ),
         ),
@@ -60,8 +60,7 @@ class ProductCard extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 'Rs. ${price.toStringAsFixed(2)}',
-                style:
-                    const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 5),
@@ -73,10 +72,8 @@ class ProductCard extends StatelessWidget {
                 ),
                 child: Text(
                   offerTag,
-                  style: TextStyle(
-                      color: context.theme.colorScheme.secondary,
-                      fontSize: 12,
-                      fontStyle: FontStyle.italic),
+                  style:
+                      TextStyle(color: context.theme.colorScheme.secondary, fontSize: 12, fontStyle: FontStyle.italic),
                 ),
               )
             ],

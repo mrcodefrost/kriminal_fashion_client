@@ -5,10 +5,10 @@ ThemeData darkMode = ThemeData(
   fontFamily: GoogleFonts.comfortaa().fontFamily,
   colorScheme: const ColorScheme.dark(
     surface: Color.fromARGB(255, 20, 20, 20),
-    primary: Color.fromARGB(255, 122, 122, 122),
-    secondary: Color.fromARGB(255, 30, 30, 30),
+    primary: Color(0xffE7ECEF),
+    secondary: Color(0xff87A0AD),
     tertiary: Color.fromARGB(255, 47, 47, 47),
-    inversePrimary: Color(0xffab2836),
+    inversePrimary: Color(0xff74C0E8),
   ),
   scaffoldBackgroundColor: const Color.fromARGB(255, 20, 20, 20),
   inputDecorationTheme: InputDecorationTheme(

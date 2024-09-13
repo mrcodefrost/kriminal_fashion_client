@@ -54,6 +54,7 @@ class StripeService {
       return null;
     } catch (e) {
       debugPrint(e.toString());
+      return null;
     }
   }
 

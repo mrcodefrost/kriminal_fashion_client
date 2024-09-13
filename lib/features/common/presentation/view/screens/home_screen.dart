@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
     return GetBuilder<ProductController>(builder: (productController) {
       Future<void> refresh() async {
         await productController.fetchProducts();
-        Get.snackbar('Success', 'Product list updated successfully', colorText: Colors.green);
+        // Get.snackbar('Success', 'Product list updated successfully', colorText: Colors.green);
       }
 
       return LiquidPullToRefresh(
@@ -81,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: productController.productCategories.length,
                     itemBuilder: (context, index) => InkWell(
                       onTap: () {
-                        productController.filterByCategory(productController.productCategories[index].name ?? 'Error');
+                        productController.filterByCategory(productController.productCategories[index].name);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                           labelStyle: TextStyle(color: context.theme.colorScheme.primary),
                           elevation: 0,
                           surfaceTintColor: Colors.transparent,
-                          label: Text(productController.productCategories[index].name ?? 'Error'),
+                          label: Text(productController.productCategories[index].name),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
                               side: BorderSide(color: context.theme.colorScheme.secondary)),
@@ -134,7 +134,7 @@ class HomeScreen extends StatelessWidget {
                           price: productController.filteredProducts[index].price ?? 0.0,
                           offerTag: productController.filteredProducts[index].shortTag ?? 'No Tags',
                           onTap: () {
-                            Get.to(const ProductDescriptionScreen(),
+                            Get.to(() => const ProductDescriptionScreen(),
                                 arguments: {'data': productController.filteredProducts[index]});
                           },
                           imageURL: productController.filteredProducts[index].image ?? AppImages.demoImageURL,

@@ -19,9 +19,7 @@ class ThemeController {
     final prefs = Get.find<SharedPreferences>();
 
     if (prefs.getBool('isPrefDarkMode') != null) {
-      return prefs.getBool('isPrefDarkMode')!
-          ? ThemeMode.dark
-          : ThemeMode.light;
+      return prefs.getBool('isPrefDarkMode')! ? ThemeMode.dark : ThemeMode.light;
     } else {
       return ThemeMode.system;
     }

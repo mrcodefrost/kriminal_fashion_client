@@ -19,7 +19,7 @@ class PaymentOptionsScreen extends StatelessWidget {
                   onPressed: () {
                     StripeService.instance.makePayment();
                   },
-                  child: Text('Stripe')),
+                  child: const Text('Stripe')),
               const SizedBox(height: 20),
               ElevatedButton(
                   onPressed: () {
@@ -27,7 +27,7 @@ class PaymentOptionsScreen extends StatelessWidget {
 
                     RazorpayService.instance.onPaymentButtonTap();
                   },
-                  child: Text('Razorpay')),
+                  child: const Text('Razorpay')),
             ],
           ),
         ),
