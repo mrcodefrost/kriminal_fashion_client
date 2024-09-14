@@ -19,12 +19,11 @@ class AddToCartButton extends StatelessWidget {
           ),
         ),
         onPressed: () {},
-        child: const Text(
+        child: Text(
           'ADD TO CART',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
         ),
       ),
     );

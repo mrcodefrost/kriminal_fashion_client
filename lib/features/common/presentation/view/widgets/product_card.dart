@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kriminal_fashion_client/utils/constants/app_constants.dart';
 
 class ProductCard extends StatelessWidget {
   final String name;
@@ -45,8 +46,9 @@ class ProductCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                imageURL,
+              FadeInImage.assetNetwork(
+                placeholder: AppImages.splashLogo,
+                image: imageURL,
                 fit: BoxFit.cover,
                 width: double.maxFinite,
                 height: 200,
@@ -54,13 +56,13 @@ class ProductCard extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 name,
-                style: const TextStyle(fontSize: 14),
+                style: Theme.of(context).textTheme.titleSmall,
                 overflow: TextOverflow.visible,
               ),
               const SizedBox(height: 10),
               Text(
                 'Rs. ${price.toStringAsFixed(2)}',
-                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.titleSmall,
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 5),
@@ -72,8 +74,9 @@ class ProductCard extends StatelessWidget {
                 ),
                 child: Text(
                   offerTag,
-                  style:
-                      TextStyle(color: context.theme.colorScheme.secondary, fontSize: 12, fontStyle: FontStyle.italic),
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
                 ),
               )
             ],

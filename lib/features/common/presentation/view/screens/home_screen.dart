@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             scrolledUnderElevation: 0,
             backgroundColor: Colors.transparent,
-            title: const Text('K R I M I N A L'),
+            title: const Text(AppStrings.appName),
             titleTextStyle: TextStyle(color: context.theme.colorScheme.primary, fontSize: 24),
             actions: [
               IconButton(

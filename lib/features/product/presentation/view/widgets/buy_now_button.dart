@@ -24,12 +24,12 @@ class BuyNowButton extends StatelessWidget {
         onPressed: () {
           Get.to(() => const PaymentOptionsScreen());
         },
-        child: const Text(
+        child: Text(
           'BUY NOW',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.surface,
+              ),
         ),
       ),
     );

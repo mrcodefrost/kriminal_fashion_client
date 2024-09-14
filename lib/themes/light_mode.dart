@@ -11,6 +11,55 @@ ThemeData lightMode = ThemeData(
     inversePrimary: Color(0xff70798c), // darkest
   ),
   scaffoldBackgroundColor: const Color(0xffFAFAFF),
+  textTheme: Typography.material2021().black.copyWith(
+        displayLarge: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        displayMedium: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        displaySmall: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        headlineLarge: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        headlineMedium: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        headlineSmall: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        titleLarge: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        titleMedium: TextStyle(
+          // fontSize: 36.fSize, //done // don't change
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        titleSmall: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        bodyLarge: TextStyle(
+          // fontSize: 18.fSize, // done // don't change
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        bodyMedium: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        bodySmall: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        labelLarge: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        labelMedium: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+        labelSmall: TextStyle(
+          fontFamily: GoogleFonts.comfortaa().fontFamily,
+        ),
+      ),
   inputDecorationTheme: InputDecorationTheme(
     errorStyle: const TextStyle(
       color: Colors.red,

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kriminal_fashion_client/features/common/presentation/view/screens/payment_options_screen.dart';
 import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/add_to_cart_button.dart';
+import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/care_composition_tile.dart';
+import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/select_size_button.dart';
 import '../../../data/model/product.dart';
 import '../widgets/buy_now_button.dart';
 
@@ -25,58 +26,45 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(product.image!),
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  product.image!,
+                  scale: 1.8,
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             Text(
               product.name!,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Text(
               product.description!,
-              style: const TextStyle(
-                fontSize: 20,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
+            Text(
+              product.shortTag!,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const SizedBox(height: 10),
+            SelectSizeButton(),
+            const SizedBox(height: 10),
             Text(
               'Rs. ${product.price!.toStringAsFixed(2)}',
-              style: const TextStyle(
-                fontSize: 24,
-              ),
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 20),
             const AddToCartButton(),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             const BuyNowButton(),
-            // SizedBox(
-            //   width: double.infinity,
-            //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
-            //       padding: const EdgeInsets.symmetric(vertical: 15),
-            //       backgroundColor: context.theme.colorScheme.secondary,
-            //     ),
-            //     child: Text(
-            //       'Buy Now',
-            //       style: TextStyle(
-            //         fontSize: 18,
-            //         color: context.theme.colorScheme.inversePrimary,
-            //       ),
-            //     ),
-            //     onPressed: () {
-            //       // Get.snackbar('Sorry !', 'Functionality under development',
-            //       //    colorText: Colors.red);
-            //       // StripeService.instance.makePayment();
-            //       Get.to(() => const PaymentOptionsScreen());
-            //     },
-            //   ),
-            // ),
+            const SizedBox(height: 40),
+            const CareCompositionTile(),
           ],
         ),
       ),

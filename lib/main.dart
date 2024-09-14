@@ -11,6 +11,7 @@ import 'package:kriminal_fashion_client/themes/theme_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/auth/domain/usecase/auth_gate.dart';
+import 'utils/constants/app_constants.dart';
 
 void main() async {
   await _setup();
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'K R I M I N A L',
+      title: AppStrings.appName,
       theme: lightMode,
       darkTheme: darkMode,
       themeMode: ThemeController.prefThemeMode(),
