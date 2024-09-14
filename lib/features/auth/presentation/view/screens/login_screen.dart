@@ -32,12 +32,8 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  'Welcome back !',
-                  style: TextStyle(
-                    fontSize: 23,
-                    fontWeight: FontWeight.w400,
-                    color: context.theme.colorScheme.primary,
-                  ),
+                  'Welcome',
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(
                   height: 20,
@@ -83,18 +79,27 @@ class LoginScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         foregroundColor: context.theme.colorScheme.tertiary,
                         backgroundColor: context.theme.colorScheme.primary),
-                    child: const Text('Login')),
+                    child: Text(
+                      'LOGIN',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: context.theme.colorScheme.tertiary,
+                          ),
+                    )),
                 TextButton(
                     onPressed: () {
                       Get.offAll(RegisterScreen(
                         onTap: onTap,
                       ));
                     },
-                    child: const Text('Don\'t have an account? Register')),
+                    child: Text(
+                      'Don\'t have an account? Register',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    )),
                 const SizedBox(height: 20),
                 ElevatedButton(
                     onPressed: () {
-                      Get.offAll(HomeScreen());
+                      Get.offAll(() => HomeScreen());
                     },
                     child: const Text('Quick Sign In')),
                 const Spacer(),

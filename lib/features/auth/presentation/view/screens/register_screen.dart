@@ -30,7 +30,10 @@ class RegisterScreen extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 12),
                 ),
                 const Spacer(),
-                const Text('Create a new account'),
+                Text(
+                  'Join the mafia today',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
                 const SizedBox(height: 20),
                 // User Name
                 CustomTextField(
@@ -96,12 +99,21 @@ class RegisterScreen extends StatelessWidget {
                       foregroundColor: context.theme.colorScheme.tertiary,
                       backgroundColor: context.theme.colorScheme.primary,
                     ),
-                    child: const Text('Register')),
+                    child: Text(
+                      'REGISTER',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: context.theme.colorScheme.tertiary,
+                          ),
+                    )),
                 TextButton(
                     onPressed: () {
                       Get.offAll(() => LoginScreen(onTap: onTap));
                     },
-                    child: const Text('Already have an account ? Login')),
+                    child: Text(
+                      'Already have an account ? Login',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    )),
                 const Spacer(),
               ],
             ),
