@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightMode = ThemeData(
-  fontFamily: GoogleFonts.comfortaa().fontFamily,
+  fontFamily: GoogleFonts.comfortaa().fontFamily, // does not work
   colorScheme: const ColorScheme.light(
     surface: Color(0xffFAFAFF), // lightest
     tertiary: Color(0xffEEF0F2), // 2nd lightest
