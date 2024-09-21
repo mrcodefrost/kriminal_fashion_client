@@ -70,6 +70,7 @@ class HomeScreen extends StatelessWidget {
               })
             ],
           ),
+          drawer: Drawer(),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
