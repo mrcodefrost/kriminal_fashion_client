@@ -71,26 +71,30 @@ class HomeScreen extends StatelessWidget {
               })
             ],
           ),
-          drawer: Drawer(
-            child: Column(
-              children: [
-                // try to match with zara UI
-                ListTile(
-                  title: Text('NEW'),
-                ),
-                ListTile(
-                  title: Text('BEST SELLERS'),
-                ),
-                ListTile(
-                  title: Text('JACKETS'),
-                ),
-                ListTile(
-                  title: Text('DRESSES'),
-                ),
-                ListTile(
-                  title: Text('TOPS'),
-                )
-              ],
+          drawer: Container(
+            width: Get.width * 0.95,
+            // Need to figure out how to add tabs inside the drawer
+            child: Drawer(
+              child: Column(
+                children: [
+                  // try to match with zara UI
+                  ListTile(
+                    title: Text('NEW'),
+                  ),
+                  ListTile(
+                    title: Text('BEST SELLERS'),
+                  ),
+                  ListTile(
+                    title: Text('JACKETS'),
+                  ),
+                  ListTile(
+                    title: Text('DRESSES'),
+                  ),
+                  ListTile(
+                    title: Text('TOPS'),
+                  )
+                ],
+              ),
             ),
           ),
           body: Padding(
