@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+const ColorScheme lightColorScheme = ColorScheme.light(
+  surface: Color(0xffFAFAFF), // lightest
+  tertiary: Color(0xffEEF0F2), // 2nd lightest
+  primary: Color(0xff000000), // 3rd
+  secondary: Color(0xff252323), // 4th
+  inversePrimary: Color(0xff70798c), // darkest
+);
+
 ThemeData lightMode = ThemeData(
   fontFamily: GoogleFonts.comfortaa().fontFamily, // does not work
-  colorScheme: const ColorScheme.light(
-    surface: Color(0xffFAFAFF), // lightest
-    tertiary: Color(0xffEEF0F2), // 2nd lightest
-    primary: Color(0xff000000), // 3rd
-    secondary: Color(0xff252323), // 4th
-    inversePrimary: Color(0xff70798c), // darkest
+  colorScheme: ColorScheme.light(
+    surface: lightColorScheme.surface, // lightest
+    tertiary: lightColorScheme.tertiary, // 2nd lightest
+    primary: lightColorScheme.primary, // 3rd
+    secondary: lightColorScheme.secondary, // 4th
+    inversePrimary: lightColorScheme.inversePrimary, // darkest
   ),
   scaffoldBackgroundColor: const Color(0xffFAFAFF),
   textTheme: Typography.material2021().black.copyWith(
@@ -60,6 +68,11 @@ ThemeData lightMode = ThemeData(
           fontFamily: GoogleFonts.comfortaa().fontFamily,
         ),
       ),
+  appBarTheme: AppBarTheme(
+    scrolledUnderElevation: 0,
+    backgroundColor: Colors.transparent,
+    titleTextStyle: TextStyle(color: lightColorScheme.primary, fontSize: 24),
+  ),
   inputDecorationTheme: InputDecorationTheme(
     errorStyle: const TextStyle(
       color: Colors.red,

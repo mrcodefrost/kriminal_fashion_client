@@ -10,9 +10,9 @@ class ProductController extends GetxController {
   late CollectionReference productCollection;
   late CollectionReference categoryCollection;
 
-  List<ProductModel> products = []; // main list
-  List<ProductModel> filteredProducts = []; // list updated based on filters
-  List<ProductCategoryModel> productCategories = [];
+  RxList<ProductModel> products = <ProductModel>[].obs; // main list
+  RxList<ProductModel> filteredProducts = <ProductModel>[].obs; // list updated based on filters
+  RxList<ProductCategoryModel> productCategories = <ProductCategoryModel>[].obs;
 
   @override
   Future<void> onInit() async {
@@ -64,7 +64,7 @@ class ProductController extends GetxController {
 
   void filterByCategory(String category) {
     filteredProducts.clear();
-    filteredProducts = products.where((product) => product.category == category).toList();
+    filteredProducts.value = products.where((product) => product.category == category).toList();
     update();
   }
 
@@ -73,7 +73,7 @@ class ProductController extends GetxController {
       filteredProducts = products;
     } else {
       List<String> lowerCaseBrands = brands.map((brand) => brand.toLowerCase()).toList();
-      filteredProducts =
+      filteredProducts.value =
           products.where((product) => lowerCaseBrands.contains(product.brand?.toLowerCase() ?? 'unbranded')).toList();
     }
     update();
@@ -83,7 +83,7 @@ class ProductController extends GetxController {
     List<ProductModel> sortedProducts = List<ProductModel>.from(filteredProducts);
     sortedProducts.sort(
         (current, next) => ascending ? current.price!.compareTo(next.price!) : next.price!.compareTo(current.price!));
-    filteredProducts = sortedProducts;
+    filteredProducts.value = sortedProducts;
     update();
   }
 }

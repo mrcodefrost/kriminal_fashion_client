@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/add_to_cart_button.dart';
 import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/care_composition_tile.dart';
 import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/select_size_button.dart';
+import 'package:kriminal_fashion_client/utils/constants/app_constants.dart';
 import '../../../data/model/product.dart';
 import '../widgets/buy_now_button.dart';
 
@@ -18,9 +19,7 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
   Widget build(BuildContext context) {
     ProductModel product = Get.arguments['data'];
     return Scaffold(
-      appBar: AppBar(
-        scrolledUnderElevation: 0,
-      ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -29,9 +28,10 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  product.image!,
-                  scale: 1.8,
+                child: FadeInImage.assetNetwork(
+                  image: product.image!,
+                  imageScale: 1.82,
+                  placeholder: AppImages.splashLogo,
                 ),
               ),
             ),
