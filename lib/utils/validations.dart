@@ -58,6 +58,14 @@ class Validations {
       return null;
     }
   };
+
+  // Empty dropdown
+  static String? Function(String?) isEmptyDropDownValidator = (String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Required';
+    }
+    return null;
+  };
 }
 
 class TrimSpaceTextInputFormatter extends TextInputFormatter {
