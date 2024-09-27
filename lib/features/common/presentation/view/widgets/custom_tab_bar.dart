@@ -16,14 +16,18 @@ class CustomTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).colorScheme.surface,
       child: TabBar(
         controller: tabController,
+        tabAlignment: TabAlignment.center,
         tabs: _buildCategoryTabs(),
         indicatorColor: Theme.of(context).colorScheme.inversePrimary,
-        labelColor: Theme.of(context).colorScheme.inversePrimary,
+        labelColor: Theme.of(context).colorScheme.primary,
+        labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
         unselectedLabelColor: Theme.of(context).colorScheme.primary,
-        isScrollable: true,
+        unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium,
+        isScrollable: true, // not required but fine, it allows for tab alignment to be at start if needed
+        padding: const EdgeInsets.only(bottom: 15),
       ),
     );
   }

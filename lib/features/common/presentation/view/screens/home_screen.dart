@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                   icon: const Icon(Icons.logout))
             ],
           ),
-          drawer: CustomDrawer(),
+          drawer: const CustomDrawer(),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(

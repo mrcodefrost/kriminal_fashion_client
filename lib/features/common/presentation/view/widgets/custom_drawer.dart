@@ -1,14 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/custom_tab_bar.dart';
+import 'package:kriminal_fashion_client/features/product/data/model/product_category.dart';
 
-class CustomDrawer extends StatelessWidget {
+import '../../../data/model/super_category.dart';
+
+class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
 
   @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _tabController = TabController(length: tabsList.length, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: Get.width,
-      // Need to figure out how to add tabs inside the drawer
       child: Drawer(
         child: SafeArea(
           child: Padding(
@@ -19,41 +42,33 @@ class CustomDrawer extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                       icon: const Icon(Icons.close),
                     ),
                     const Spacer(),
-                    IconButton(
+                    TextButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.search),
+                      child: const Text('MY ACCOUNT'),
                     ),
                     TextButton(
                       onPressed: () {},
-                      child: Text('MY ACCOUNT'),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text('CART'),
+                      child: const Text('CART'),
                     ),
                   ],
                 ),
-                SizedBox(height: 25),
-
-                ListTile(
-                  title: Text('NEW'),
+                const SizedBox(height: 25),
+                // Tabs
+                CustomTabBar(tabController: _tabController),
+                const SizedBox(height: 25),
+                // Tabs content
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: getProductCategoryInThisSuperCategory(productCategories),
+                  ),
                 ),
-                ListTile(
-                  title: Text('BEST SELLERS'),
-                ),
-                ListTile(
-                  title: Text('JACKETS'),
-                ),
-                ListTile(
-                  title: Text('DRESSES'),
-                ),
-                ListTile(
-                  title: Text('TOPS'),
-                )
               ],
             ),
           ),
@@ -63,27 +78,91 @@ class CustomDrawer extends StatelessWidget {
   }
 }
 
-// return list of foods in a given category
-List<Widget> getFoodInThisCategory(List<String> categories) {
-  return categories.map((category) {
+// sort out and return a list of product categories that belong to a specific  super category
+List<ProductCategory> _filterProductCategoryBySuperCategory(
+    SuperCategory superCategory, List<ProductCategory> allProductCategories) {
+  return allProductCategories.where((productCategory) => productCategory.superCategoryName == superCategory).toList();
+}
+
+// return list tiles of product categories for selected super category
+List<Widget> getProductCategoryInThisSuperCategory(List<ProductCategory> productCategories) {
+  return SuperCategory.values.map((superCategory) {
+    List<ProductCategory> filteredCategories = _filterProductCategoryBySuperCategory(superCategory, productCategories);
     return ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.all(0),
-        itemCount: categories.length,
+        itemCount: filteredCategories.length,
         itemBuilder: (context, index) {
+          final category = filteredCategories[index];
           // return food tile UI
-          return ListTile(onTap: () {});
+          return ListTile(title: Text(category.name), onTap: () {});
         });
   }).toList();
 }
 
-const List<String> categories = [
-  'NEW',
-  'BEST SELLERS',
-  'JACKETS',
-  'DRESSES',
-  'TOPS',
-  'SWEATERS',
-  'SHIRTS',
-  'SUNGLASSES',
+final List<ProductCategory> productCategories = [
+  ProductCategory(
+    id: '1',
+    name: 'BEST SELLERS',
+    superCategoryName: SuperCategory.woman,
+  ),
+  ProductCategory(
+    id: '2',
+    name: 'DENIMS',
+    superCategoryName: SuperCategory.woman,
+  ),
+  ProductCategory(
+    id: '3',
+    name: 'JACKETS | TRENCH COATS',
+    superCategoryName: SuperCategory.woman,
+  ),
+  ProductCategory(
+    id: '4',
+    name: 'BLAZERS',
+    superCategoryName: SuperCategory.woman,
+  ),
+  ProductCategory(
+    id: '5',
+    name: 'DRESSES',
+    superCategoryName: SuperCategory.woman,
+  ),
+  ProductCategory(
+    id: '6',
+    name: 'TOPS | BODYSUITS',
+    superCategoryName: SuperCategory.woman,
+  ),
+  ProductCategory(
+    id: '7',
+    name: 'T-SHIRTS',
+    superCategoryName: SuperCategory.woman,
+  ),
+  ProductCategory(
+    id: '8',
+    name: 'BESTSELLER',
+    superCategoryName: SuperCategory.man,
+  ),
+  ProductCategory(
+    id: '8',
+    name: 'JACKETS | GILETS',
+    superCategoryName: SuperCategory.man,
+  ),
+  ProductCategory(
+    id: '8',
+    name: 'COATS',
+    superCategoryName: SuperCategory.man,
+  ),
+  ProductCategory(
+    id: '8',
+    name: 'SWEATERS | CARDIGANS',
+    superCategoryName: SuperCategory.man,
+  ),
+  ProductCategory(
+    id: '8',
+    name: 'TROUSERS',
+    superCategoryName: SuperCategory.man,
+  ),
+  ProductCategory(
+    id: '8',
+    name: 'JEANS',
+    superCategoryName: SuperCategory.man,
+  ),
 ];

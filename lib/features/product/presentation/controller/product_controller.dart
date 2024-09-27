@@ -12,7 +12,7 @@ class ProductController extends GetxController {
 
   RxList<ProductModel> products = <ProductModel>[].obs; // main list
   RxList<ProductModel> filteredProducts = <ProductModel>[].obs; // list updated based on filters
-  RxList<ProductCategoryModel> productCategories = <ProductCategoryModel>[].obs;
+  RxList<ProductCategory> productCategories = <ProductCategory>[].obs;
 
   @override
   Future<void> onInit() async {
@@ -47,9 +47,8 @@ class ProductController extends GetxController {
   Future<void> fetchCategories() async {
     try {
       QuerySnapshot categorySnapshot = await categoryCollection.get();
-      final List<ProductCategoryModel> retrievedCategories = categorySnapshot.docs
-          .map((doc) => ProductCategoryModel.fromJson(doc.data() as Map<String, dynamic>))
-          .toList();
+      final List<ProductCategory> retrievedCategories =
+          categorySnapshot.docs.map((doc) => ProductCategory.fromJson(doc.data() as Map<String, dynamic>)).toList();
       // clearing the local list to avoid multiple entries
       productCategories.clear();
       productCategories.assignAll(retrievedCategories);
