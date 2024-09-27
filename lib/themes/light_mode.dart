@@ -73,24 +73,29 @@ ThemeData lightMode = ThemeData(
     backgroundColor: Colors.transparent,
     titleTextStyle: TextStyle(color: lightColorScheme.primary, fontSize: 24),
   ),
-  inputDecorationTheme: InputDecorationTheme(
-    errorStyle: const TextStyle(
+  inputDecorationTheme: const InputDecorationTheme(
+    errorStyle: TextStyle(
       color: Colors.red,
       fontSize: 12,
     ),
     errorMaxLines: 4,
     fillColor: Colors.transparent,
-    contentPadding: const EdgeInsets.all(10),
+    contentPadding: EdgeInsets.all(10),
     // normal state = enabledBorder
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-    ),
+    enabledBorder: OutlineInputBorder(),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(
+      borderSide: BorderSide(
         color: Color(0xff252323),
         width: 2,
       ),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.red,
+      ),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.red, width: 2),
     ),
   ),
 );
