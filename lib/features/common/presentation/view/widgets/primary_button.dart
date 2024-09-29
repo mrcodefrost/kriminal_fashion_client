@@ -12,8 +12,8 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 10),
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          foregroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.surface,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           shape: BeveledRectangleBorder(
             side: BorderSide(
               color: Theme.of(context).colorScheme.secondary,
@@ -25,6 +25,7 @@ class PrimaryButton extends StatelessWidget {
           text,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.surface,
               ),
         ),
       ),

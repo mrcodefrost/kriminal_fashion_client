@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_client/features/auth/presentation/controller/auth_controller.dart';
-import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
 import 'package:kriminal_fashion_client/features/auth/presentation/view/screens/register_screen.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/primary_button.dart';
 
 import '../../../../../utils/validations.dart';
 import '../../../../common/presentation/view/widgets/custom_text_field.dart';
@@ -28,7 +29,10 @@ class LoginScreen extends StatelessWidget {
                 const Spacer(),
                 const Text(
                   'KRIMINAL',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 12),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      letterSpacing: 12),
                 ),
                 const Spacer(),
                 Text(
@@ -69,23 +73,15 @@ class LoginScreen extends StatelessWidget {
                   validator: Validations.isEmptyValidator,
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                    onPressed: () {
-                      // authController.loginWithPhone(); // logins without password
-                      if (_loginFormKey.currentState!.validate()) {
-                        authController.loginWithEmail();
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                        foregroundColor: context.theme.colorScheme.tertiary,
-                        backgroundColor: context.theme.colorScheme.primary),
-                    child: Text(
-                      'LOGIN',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: context.theme.colorScheme.tertiary,
-                          ),
-                    )),
+                // BuyNowButton(),
+                PrimaryButton(
+                  text: 'LOGIN',
+                  onPressed: () {
+                    if (_loginFormKey.currentState!.validate()) {
+                      authController.loginWithEmail();
+                    }
+                  },
+                ),
                 TextButton(
                     onPressed: () {
                       Get.offAll(RegisterScreen(

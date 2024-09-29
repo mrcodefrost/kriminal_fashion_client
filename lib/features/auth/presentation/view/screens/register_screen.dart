@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:kriminal_fashion_client/features/auth/presentation/controller/auth_controller.dart';
 import 'package:kriminal_fashion_client/features/auth/presentation/view/screens/login_screen.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/custom_text_field.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/primary_button.dart';
 import 'package:kriminal_fashion_client/utils/validations.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -27,7 +28,10 @@ class RegisterScreen extends StatelessWidget {
                 const Spacer(),
                 const Text(
                   'KRIMINAL',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 12),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      letterSpacing: 12),
                 ),
                 const Spacer(),
                 Text(
@@ -89,23 +93,13 @@ class RegisterScreen extends StatelessWidget {
                   validator: Validations.isEmptyValidator,
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
+                PrimaryButton(
+                    text: 'REGISTER',
                     onPressed: () {
                       if (_registerFormKey.currentState!.validate()) {
                         authController.registerUser();
                       }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: context.theme.colorScheme.tertiary,
-                      backgroundColor: context.theme.colorScheme.primary,
-                    ),
-                    child: Text(
-                      'REGISTER',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: context.theme.colorScheme.tertiary,
-                          ),
-                    )),
+                    }),
                 TextButton(
                     onPressed: () {
                       Get.offAll(() => LoginScreen(onTap: onTap));
