@@ -4,9 +4,9 @@ import 'package:kriminal_fashion_client/features/common/presentation/view/widget
 import 'package:kriminal_fashion_client/features/product/data/model/product_category.dart';
 
 import '../../../../account/presentation/view/screens/account_screen.dart';
-import '../../../../product/presentation/controller/product_controller.dart';
-import '../../../data/model/super_category.dart';
-import '../../../domain/usecase/common_usecases.dart';
+import '../../../../common/data/model/super_category.dart';
+import '../../../../common/domain/usecase/common_usecases.dart';
+import '../../controller/product_controller.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -15,7 +15,8 @@ class CustomDrawer extends StatefulWidget {
   State<CustomDrawer> createState() => _CustomDrawerState();
 }
 
-class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderStateMixin {
+class _CustomDrawerState extends State<CustomDrawer>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final productController = Get.find<ProductController>();
 
@@ -23,7 +24,8 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
   void initState() {
     super.initState();
 
-    _tabController = TabController(length: superCategoriesList.length, vsync: this);
+    _tabController =
+        TabController(length: superCategoriesList.length, vsync: this);
   }
 
   @override
@@ -72,7 +74,8 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
                   Expanded(
                     child: TabBarView(
                       controller: _tabController,
-                      children: getProductCategoryInThisSuperCategory(productController.productCategories),
+                      children: getProductCategoryInThisSuperCategory(
+                          productController.productCategories),
                     ),
                   ),
                 ],
@@ -89,16 +92,19 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
 // hence, there is no need to pass the tab index
 // as long as the list of tabs are the same as the list of product categories
 // return list tiles of product categories for selected super category
-List<Widget> getProductCategoryInThisSuperCategory(List<ProductCategory> productCategories) {
+List<Widget> getProductCategoryInThisSuperCategory(
+    List<ProductCategory> productCategories) {
   return superCategoriesList.map((superCategory) {
-    List<ProductCategory> filteredCategories = filterProductCategoryBySuperCategory(superCategory, productCategories);
+    List<ProductCategory> filteredCategories =
+        filterProductCategoryBySuperCategory(superCategory, productCategories);
     return ListView.builder(
         padding: const EdgeInsets.all(0),
         itemCount: filteredCategories.length,
         itemBuilder: (context, index) {
           final category = filteredCategories[index];
           // return food tile UI
-          return ListTile(title: Text(category.name.toUpperCase()), onTap: () {});
+          return ListTile(
+              title: Text(category.name.toUpperCase()), onTap: () {});
         });
   }).toList();
 }
