@@ -1,70 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:kriminal_fashion_client/features/auth/presentation/controller/auth_controller.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/custom_drawer.dart';
-import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/custom_drop_down_menu.dart';
-import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/multi_select_drop_down_button.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/product_card.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/secondary_button.dart';
 import 'package:kriminal_fashion_client/features/product/presentation/controller/product_controller.dart';
 import 'package:kriminal_fashion_client/features/product/presentation/view/screens/product_description_screen.dart';
-import 'package:kriminal_fashion_client/themes/theme_controller.dart';
-import 'package:kriminal_fashion_client/utils/constants/app_constants.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final List<String> brands = [
-    'Unbranded',
-    'Zara',
-    'Forever 21',
-    'Snitch',
-    'Rare Rabbit',
-    'Only',
-    'Vera Moda',
-    'Van Heusan',
-    'Peter England',
-    'Allen Solly',
-    'Domyos',
-    'Kipsta',
-    'Puma',
-    'Sketchers',
-    'Adidas',
-    'Clarks',
-  ];
   final List<String> dropDownItems = ['Rs. Low to High', 'Rs. High to Low'];
   final productController = Get.find<ProductController>();
   final authController = Get.find<AuthController>();
 
-  Future<void> refresh() async {
-    await productController.fetchProducts();
-  }
+  final List<String> sizesList = ['XS', 'S', 'M', 'L', 'XL'];
 
   @override
   Widget build(BuildContext context) {
-    return LiquidPullToRefresh(
-      onRefresh: refresh,
-      child: Obx(
-        () => Scaffold(
+    return Obx(
+      () => LiquidPullToRefresh(
+        onRefresh: productController.onRefresh,
+        child: Scaffold(
           appBar: AppBar(
-            title: const Text(AppStrings.appName),
             actions: [
-              IconButton(
-                  onPressed: () {
-                    ThemeController.toggleThemeMode();
-                  },
-                  icon: Icon(
-                    Icons.lightbulb,
-                    color: context.theme.colorScheme.inversePrimary,
-                  )),
-              IconButton(
-                  onPressed: () {
-                    final box = GetStorage();
-                    box.erase();
-                    authController.signOut();
-                  },
-                  icon: const Icon(Icons.logout))
+              IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+              TextButton(onPressed: () {}, child: const Text('WISHLIST')),
+              TextButton(onPressed: () {}, child: const Text('CART (0)')),
             ],
           ),
           drawer: const CustomDrawer(),
@@ -88,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                           labelStyle: TextStyle(color: context.theme.colorScheme.primary),
                           elevation: 0,
                           surfaceTintColor: Colors.transparent,
-                          label: Text(productController.productCategories[index].name),
+                          label: Text(productController.productCategories[index].name.toUpperCase()),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
                               side: BorderSide(color: context.theme.colorScheme.secondary)),
@@ -97,45 +60,61 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height: 10),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Flexible(
-                      child: CustomDropDownMenu(
-                        items: dropDownItems,
-                        hintText: 'Sort',
-                        onSelected: (selectedValue) {
-                          productController.sortByPrice(
-                              // selectedValue == 'Rs. Low to High'
-                              ascending: selectedValue == dropDownItems[0] ? true : false);
-                        },
-                      ),
+                    Row(
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              getBottomSheet(context: context, items: sizesList, onTap: () {});
+                            },
+                            child: Text('SIZE')),
+                        TextButton(onPressed: () {}, child: Text('PRICE')),
+                        TextButton(onPressed: () {}, child: Text('COLOUR')),
+                      ],
                     ),
-                    Flexible(
-                        child: MultiSelectDropDownButton(
-                      items: brands,
-                      onSelectionChanged: (selectedItems) {
-                        productController.filterByBrand(selectedItems);
-                      },
-                    )),
                   ],
                 ),
-                const SizedBox(height: 30),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Flexible(
+                //       child: CustomDropDownMenu(
+                //         items: dropDownItems,
+                //         hintText: 'Sort',
+                //         onSelected: (selectedValue) {
+                //           productController.sortByPrice(
+                //               // selectedValue == 'Rs. Low to High'
+                //               ascending: selectedValue == dropDownItems[0] ? true : false);
+                //         },
+                //       ),
+                //     ),
+                //     Flexible(
+                //         child: MultiSelectDropDownButton(
+                //       items: brands,
+                //       onSelectionChanged: (selectedItems) {
+                //         productController.filterByBrand(selectedItems);
+                //       },
+                //     )),
+                //   ],
+                // ),
+                const SizedBox(height: 10),
                 Expanded(
                   child: GridView.builder(
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, crossAxisSpacing: 8, childAspectRatio: 0.45, mainAxisSpacing: 8),
+                          crossAxisCount: 2, crossAxisSpacing: 8, childAspectRatio: 0.62, mainAxisSpacing: 10),
                       itemCount: productController.filteredProducts.length,
                       itemBuilder: (context, index) {
                         return ProductCard(
-                          name: productController.filteredProducts[index].name ?? 'No Name',
-                          price: productController.filteredProducts[index].price ?? 0.0,
-                          offerTag: productController.filteredProducts[index].shortTag ?? 'No Tags',
+                          name: productController.filteredProducts[index].name,
+                          price: productController.filteredProducts[index].price,
+                          offerTag: productController.filteredProducts[index].shortTag,
                           onTap: () {
                             Get.to(() => const ProductDescriptionScreen(),
                                 arguments: {'data': productController.filteredProducts[index]});
                           },
-                          imageURL: productController.filteredProducts[index].image ?? AppImages.demoImageURL,
+                          imageURL: productController.filteredProducts[index].image,
                           index: index,
                         );
                       }),
@@ -147,4 +126,57 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void getBottomSheet({required BuildContext context, required List<String> items, required VoidCallback onTap}) {
+  showModalBottomSheet(
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.zero,
+    ),
+    context: context,
+    builder: (context) => SizedBox(
+      width: Get.width,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Wrap(
+            alignment: WrapAlignment.center,
+            direction: Axis.horizontal,
+            children: items.map((category) {
+              return InkWell(
+                // filter by size, price, color
+                // productController
+                //     .filterByCategory(productController.productCategories[index].name);
+                onTap: onTap,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  child: Chip(
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    labelStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
+                    elevation: 0,
+                    surfaceTintColor: Colors.transparent,
+                    label: Text(category.toUpperCase()),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                        side: BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Flexible(
+                child: SecondaryButton(text: 'Clear'),
+              ),
+              Flexible(
+                child: SecondaryButton(text: 'Clear'),
+              ),
+            ],
+          )
+        ],
+      ),
+    ),
+  );
 }

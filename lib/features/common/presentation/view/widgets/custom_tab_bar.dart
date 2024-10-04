@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kriminal_fashion_client/features/common/data/model/super_category.dart';
 
 class CustomTabBar extends StatelessWidget {
   final TabController tabController;
@@ -6,7 +7,7 @@ class CustomTabBar extends StatelessWidget {
   const CustomTabBar({super.key, required this.tabController});
 
   List<Tab> _buildCategoryTabs() {
-    return tabsList.map((tab) {
+    return superCategoriesList.map((tab) {
       return Tab(
         text: tab.toString().split('.').last.toUpperCase(),
       );
@@ -32,5 +33,3 @@ class CustomTabBar extends StatelessWidget {
     );
   }
 }
-
-const tabsList = ['WOMAN', 'MAN', 'KIDS', 'BEAUTY'];

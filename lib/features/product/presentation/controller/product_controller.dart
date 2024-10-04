@@ -10,8 +10,8 @@ class ProductController extends GetxController {
   late CollectionReference productCollection;
   late CollectionReference categoryCollection;
 
-  RxList<ProductModel> products = <ProductModel>[].obs; // main list
-  RxList<ProductModel> filteredProducts = <ProductModel>[].obs; // list updated based on filters
+  RxList<Product> products = <Product>[].obs; // main list
+  RxList<Product> filteredProducts = <Product>[].obs; // list updated based on filters
   RxList<ProductCategory> productCategories = <ProductCategory>[].obs;
 
   @override
@@ -24,11 +24,15 @@ class ProductController extends GetxController {
     await fetchProducts();
   }
 
+  Future<void> onRefresh() async {
+    await fetchProducts();
+  }
+
   Future<void> fetchProducts() async {
     try {
       QuerySnapshot productSnapshot = await productCollection.get();
-      final List<ProductModel> retrievedProducts =
-          productSnapshot.docs.map((doc) => ProductModel.fromJson(doc.data() as Map<String, dynamic>)).toList();
+      final List<Product> retrievedProducts =
+          productSnapshot.docs.map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>)).toList();
       // clearing the local list to avoid multiple entries
       products.clear();
       products.assignAll(retrievedProducts);
@@ -67,21 +71,21 @@ class ProductController extends GetxController {
     update();
   }
 
-  void filterByBrand(List<String> brands) {
-    if (brands.isEmpty) {
-      filteredProducts = products;
-    } else {
-      List<String> lowerCaseBrands = brands.map((brand) => brand.toLowerCase()).toList();
-      filteredProducts.value =
-          products.where((product) => lowerCaseBrands.contains(product.brand?.toLowerCase() ?? 'unbranded')).toList();
-    }
-    update();
-  }
+  // void filterByBrand(List<String> brands) {
+  //   if (brands.isEmpty) {
+  //     filteredProducts = products;
+  //   } else {
+  //     List<String> lowerCaseBrands = brands.map((brand) => brand.toLowerCase()).toList();
+  //     filteredProducts.value =
+  //         products.where((product) => lowerCaseBrands.contains(product.brand?.toLowerCase() ?? 'unbranded')).toList();
+  //   }
+  //   update();
+  // }
 
   void sortByPrice({required bool ascending}) {
-    List<ProductModel> sortedProducts = List<ProductModel>.from(filteredProducts);
-    sortedProducts.sort(
-        (current, next) => ascending ? current.price!.compareTo(next.price!) : next.price!.compareTo(current.price!));
+    List<Product> sortedProducts = List<Product>.from(filteredProducts);
+    sortedProducts
+        .sort((current, next) => ascending ? current.price.compareTo(next.price) : next.price.compareTo(current.price));
     filteredProducts.value = sortedProducts;
     update();
   }

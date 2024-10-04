@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class SecondaryButton extends StatelessWidget {
   final String text;
-  const SecondaryButton({super.key, required this.text});
+  final VoidCallback? onPressed;
+  final bool? capitalise;
+  const SecondaryButton({super.key, required this.text, this.onPressed, this.capitalise});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +21,9 @@ class SecondaryButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
-          text,
+          capitalise == true ? text.toUpperCase() : text,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
