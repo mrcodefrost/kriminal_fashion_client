@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/globals.dart';
-import '../../../common/data/model/client_user_model.dart';
+import '../../data/model/client_user_model.dart';
 import '../../domain/usecase/auth_gate.dart';
 
 class AuthController extends GetxController {
@@ -60,7 +60,8 @@ class AuthController extends GetxController {
   void registerUser() async {
     try {
       await firebaseAuth.createUserWithEmailAndPassword(
-          email: registerEmailController.text, password: registerPasswordController.text);
+          email: registerEmailController.text,
+          password: registerPasswordController.text);
       addUser();
       Get.offAll(const AuthGate());
     } catch (e) {
@@ -79,7 +80,8 @@ class AuthController extends GetxController {
       );
       final clientUserJson = clientUser.toJson();
       doc.set(clientUserJson);
-      Get.snackbar('Success', 'User added successfully', colorText: Colors.green);
+      Get.snackbar('Success', 'User added successfully',
+          colorText: Colors.green);
     } catch (e) {
       Get.snackbar('Error', 'Unable to create user', colorText: Colors.red);
       debugPrint(e.toString());
@@ -91,7 +93,8 @@ class AuthController extends GetxController {
   Future<void> loginWithEmail() async {
     try {
       await firebaseAuth.signInWithEmailAndPassword(
-          email: loginEmailController.text, password: loginPasswordController.text);
+          email: loginEmailController.text,
+          password: loginPasswordController.text);
       Get.offAll(const AuthGate());
       clearLoginControllers();
     } catch (e) {
