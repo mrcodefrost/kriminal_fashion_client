@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class SecondaryButton extends StatelessWidget {
   final String text;
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
   final bool? capitalise;
-  const SecondaryButton({super.key, required this.text, this.onPressed, this.capitalise});
+  const SecondaryButton({super.key, required this.text, required this.onPressed, this.capitalise = true});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,8 @@ class SecondaryButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 10),
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          foregroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.surface,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           shape: BeveledRectangleBorder(
             side: BorderSide(
               color: Theme.of(context).colorScheme.secondary,
@@ -26,6 +26,7 @@ class SecondaryButton extends StatelessWidget {
           capitalise == true ? text.toUpperCase() : text,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.surface,
               ),
         ),
       ),

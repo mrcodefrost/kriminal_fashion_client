@@ -4,6 +4,9 @@ import 'package:kriminal_fashion_client/features/auth/presentation/controller/au
 import 'package:kriminal_fashion_client/features/auth/presentation/view/screens/register_screen.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/screens/home_screen.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/primary_button.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/secondary_button.dart';
+import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/add_to_cart_button.dart';
+import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/buy_now_button.dart';
 
 import '../../../../../utils/validations.dart';
 import '../../../../common/presentation/view/widgets/custom_text_field.dart';
@@ -29,10 +32,7 @@ class LoginScreen extends StatelessWidget {
                 const Spacer(),
                 const Text(
                   'KRIMINAL',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                      letterSpacing: 12),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 12),
                 ),
                 const Spacer(),
                 Text(
@@ -73,7 +73,6 @@ class LoginScreen extends StatelessWidget {
                   validator: Validations.isEmptyValidator,
                 ),
                 const SizedBox(height: 20),
-                // BuyNowButton(),
                 PrimaryButton(
                   text: 'LOGIN',
                   onPressed: () {

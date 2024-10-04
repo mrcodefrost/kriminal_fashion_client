@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_client/features/auth/presentation/controller/auth_controller.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/custom_drawer.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/primary_button.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/product_card.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/secondary_button.dart';
 import 'package:kriminal_fashion_client/features/product/presentation/controller/product_controller.dart';
@@ -168,10 +169,16 @@ void getBottomSheet({required BuildContext context, required List<String> items,
           Row(
             children: [
               Flexible(
-                child: SecondaryButton(text: 'Clear'),
+                child: PrimaryButton(
+                  text: 'Clear',
+                  onPressed: () {},
+                ),
               ),
               Flexible(
-                child: SecondaryButton(text: 'Clear'),
+                child: PrimaryButton(
+                  text: 'Show results',
+                  onPressed: () {},
+                ),
               ),
             ],
           )
