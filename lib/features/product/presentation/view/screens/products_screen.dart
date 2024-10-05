@@ -8,6 +8,8 @@ import 'package:kriminal_fashion_client/features/product/presentation/view/widge
 import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/product_card.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
+import '../../../../cart/presentation/view/screens/cart_screen.dart';
+
 class ProductsScreen extends StatelessWidget {
   ProductsScreen({super.key});
 
@@ -27,7 +29,11 @@ class ProductsScreen extends StatelessWidget {
             actions: [
               IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
               TextButton(onPressed: () {}, child: const Text('WISHLIST')),
-              TextButton(onPressed: () {}, child: const Text('CART (0)')),
+              TextButton(
+                  onPressed: () {
+                    Get.to(() => const CartScreen());
+                  },
+                  child: const Text('CART (0)')),
             ],
           ),
           drawer: const CustomDrawer(),
