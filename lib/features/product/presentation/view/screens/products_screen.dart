@@ -28,7 +28,7 @@ class ProductsScreen extends StatelessWidget {
               IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
               TextButton(
                   onPressed: () {
-                    Get.to(() => CartScreen());
+                    Get.to(() => CartOrWishlistScreen());
                   },
                   child: const Text('CART (0)')),
             ],
@@ -50,14 +50,14 @@ class ProductsScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(right: 8.0, top: 8, bottom: 8),
                         child: Chip(
-                          backgroundColor: context.theme.colorScheme.surface,
-                          labelStyle: TextStyle(color: context.theme.colorScheme.primary),
+                          backgroundColor: Theme.of(context).colorScheme.surface,
+                          labelStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
                           elevation: 0,
                           surfaceTintColor: Colors.transparent,
                           label: Text(productController.productCategories[index].name.toUpperCase()),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
-                              side: BorderSide(color: context.theme.colorScheme.secondary)),
+                              side: BorderSide(color: Theme.of(context).colorScheme.secondary)),
                         ),
                       ),
                     ),
