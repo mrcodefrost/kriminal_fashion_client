@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../common/presentation/view/widgets/primary_button.dart';
+import '../../../../product/presentation/view/screens/product_description_screen.dart';
+import '../../../../product/presentation/view/widgets/product_card.dart';
 import '../../controller/cart_controller.dart';
-
-List wishList = [];
 
 class CartOrWishlistScreen extends StatelessWidget {
   final CartController cartController = Get.put(CartController()); // Initialize controller
@@ -38,7 +38,9 @@ class CartOrWishlistScreen extends StatelessWidget {
             () => Expanded(
               child: cartController.selectedIndex.value == 0
                   ? CartContent() // Show Cart content
-                  : WishlistContent(), // Show Wishlist content
+                  : WishlistContent(
+                      cartController: cartController,
+                    ), // Show Wishlist content
             ),
           ),
         ],
@@ -76,28 +78,56 @@ class CartContent extends StatelessWidget {
 }
 
 class WishlistContent extends StatelessWidget {
-  const WishlistContent({super.key});
+  final CartController cartController;
+
+  const WishlistContent({super.key, required this.cartController});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: SizedBox(
         width: double.maxFinite,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(
-              Icons.bookmark_border,
-              size: 40,
-            ),
-            SizedBox(height: 20),
-            Text('YOU DO NOT HAVE ANY SAVED ITEMS'),
-            SizedBox(height: 20),
-            Text('Save your favourites and share them with anyone you like')
-          ],
-        ),
+        child: cartController.wishListedProducts.isEmpty
+            ? const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.bookmark_border,
+                    size: 40,
+                  ),
+                  SizedBox(height: 20),
+                  Text('YOU DO NOT HAVE ANY SAVED ITEMS'),
+                  SizedBox(height: 20),
+                  Text('Save your favourites and share them with anyone you like')
+                ],
+              )
+            : Column(
+                children: [
+                  const SizedBox(height: 10),
+                  GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, crossAxisSpacing: 8, childAspectRatio: 0.62, mainAxisSpacing: 10),
+                      itemCount: cartController.wishListedProducts.length,
+                      itemBuilder: (context, index) {
+                        return ProductCard(
+                          name: cartController.wishListedProducts[index].name,
+                          price: cartController.wishListedProducts[index].price,
+                          offerTag: cartController.wishListedProducts[index].shortTag,
+                          onTap: () {
+                            Get.to(() => const ProductDescriptionScreen(),
+                                arguments: {'data': cartController.wishListedProducts[index]});
+                          },
+                          imageURL: cartController.wishListedProducts[index].image,
+                          index: index,
+                          // wishListTap: () {
+                          //   cartController.wishListedProducts.add(cartController.wishListedProducts[index]);
+                          // },
+                        );
+                      }),
+                ],
+              ),
       ),
     );
   }

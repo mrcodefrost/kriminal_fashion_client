@@ -8,15 +8,18 @@ class ProductCard extends StatefulWidget {
   final String offerTag;
   final Function onTap;
   final int index;
+  // final Function wishListTap;
 
-  const ProductCard(
-      {super.key,
-      required this.name,
-      required this.imageURL,
-      required this.price,
-      required this.offerTag,
-      required this.onTap,
-      required this.index});
+  const ProductCard({
+    super.key,
+    required this.name,
+    required this.imageURL,
+    required this.price,
+    required this.offerTag,
+    required this.onTap,
+    required this.index,
+    // required this.wishListTap,
+  });
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -59,6 +62,7 @@ class _ProductCardState extends State<ProductCard> {
                   setState(() {
                     isWishListed = !isWishListed;
                   });
+                  // widget.wishListTap();
                 },
                 child: Icon(
                   isWishListed ? Icons.bookmark : Icons.bookmark_border,
