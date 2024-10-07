@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kriminal_fashion_client/features/auth/presentation/controller/auth_controller.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/primary_button.dart';
 import 'package:kriminal_fashion_client/features/product/presentation/controller/product_controller.dart';
 import 'package:kriminal_fashion_client/features/product/presentation/view/screens/product_description_screen.dart';
@@ -15,7 +14,6 @@ class ProductsScreen extends StatelessWidget {
 
   final List<String> dropDownItems = ['Rs. Low to High', 'Rs. High to Low'];
   final productController = Get.find<ProductController>();
-  final authController = Get.find<AuthController>();
 
   final List<String> sizesList = ['XS', 'S', 'M', 'L', 'XL'];
 
@@ -28,10 +26,9 @@ class ProductsScreen extends StatelessWidget {
           appBar: AppBar(
             actions: [
               IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-              TextButton(onPressed: () {}, child: const Text('WISHLIST')),
               TextButton(
                   onPressed: () {
-                    Get.to(() => const CartScreen());
+                    Get.to(() => CartScreen());
                   },
                   child: const Text('CART (0)')),
             ],
@@ -48,25 +45,19 @@ class ProductsScreen extends StatelessWidget {
                     itemCount: productController.productCategories.length,
                     itemBuilder: (context, index) => InkWell(
                       onTap: () {
-                        productController.filterByCategory(
-                            productController.productCategories[index].name);
+                        productController.filterByCategory(productController.productCategories[index].name);
                       },
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                            right: 8.0, top: 8, bottom: 8),
+                        padding: const EdgeInsets.only(right: 8.0, top: 8, bottom: 8),
                         child: Chip(
                           backgroundColor: context.theme.colorScheme.surface,
-                          labelStyle: TextStyle(
-                              color: context.theme.colorScheme.primary),
+                          labelStyle: TextStyle(color: context.theme.colorScheme.primary),
                           elevation: 0,
                           surfaceTintColor: Colors.transparent,
-                          label: Text(productController
-                              .productCategories[index].name
-                              .toUpperCase()),
+                          label: Text(productController.productCategories[index].name.toUpperCase()),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
-                              side: BorderSide(
-                                  color: context.theme.colorScheme.secondary)),
+                              side: BorderSide(color: context.theme.colorScheme.secondary)),
                         ),
                       ),
                     ),
@@ -79,10 +70,7 @@ class ProductsScreen extends StatelessWidget {
                       children: [
                         TextButton(
                             onPressed: () {
-                              getBottomSheet(
-                                  context: context,
-                                  items: sizesList,
-                                  onTap: () {});
+                              getBottomSheet(context: context, items: sizesList, onTap: () {});
                             },
                             child: Text('SIZE')),
                         TextButton(onPressed: () {}, child: Text('PRICE')),
@@ -117,29 +105,19 @@ class ProductsScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 Expanded(
                   child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 8,
-                              childAspectRatio: 0.62,
-                              mainAxisSpacing: 10),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, crossAxisSpacing: 8, childAspectRatio: 0.62, mainAxisSpacing: 10),
                       itemCount: productController.filteredProducts.length,
                       itemBuilder: (context, index) {
                         return ProductCard(
                           name: productController.filteredProducts[index].name,
-                          price:
-                              productController.filteredProducts[index].price,
-                          offerTag: productController
-                              .filteredProducts[index].shortTag,
+                          price: productController.filteredProducts[index].price,
+                          offerTag: productController.filteredProducts[index].shortTag,
                           onTap: () {
                             Get.to(() => const ProductDescriptionScreen(),
-                                arguments: {
-                                  'data':
-                                      productController.filteredProducts[index]
-                                });
+                                arguments: {'data': productController.filteredProducts[index]});
                           },
-                          imageURL:
-                              productController.filteredProducts[index].image,
+                          imageURL: productController.filteredProducts[index].image,
                           index: index,
                         );
                       }),
@@ -153,10 +131,7 @@ class ProductsScreen extends StatelessWidget {
   }
 }
 
-void getBottomSheet(
-    {required BuildContext context,
-    required List<String> items,
-    required VoidCallback onTap}) {
+void getBottomSheet({required BuildContext context, required List<String> items, required VoidCallback onTap}) {
   showModalBottomSheet(
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.zero,
@@ -180,15 +155,13 @@ void getBottomSheet(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: Chip(
                     backgroundColor: Theme.of(context).colorScheme.surface,
-                    labelStyle:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
+                    labelStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
                     elevation: 0,
                     surfaceTintColor: Colors.transparent,
                     label: Text(category.toUpperCase()),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.zero,
-                        side: BorderSide(
-                            color: Theme.of(context).colorScheme.secondary)),
+                        side: BorderSide(color: Theme.of(context).colorScheme.secondary)),
                   ),
                 ),
               );
