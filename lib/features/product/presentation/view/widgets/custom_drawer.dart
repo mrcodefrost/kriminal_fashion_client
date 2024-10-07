@@ -15,8 +15,7 @@ class CustomDrawer extends StatefulWidget {
   State<CustomDrawer> createState() => _CustomDrawerState();
 }
 
-class _CustomDrawerState extends State<CustomDrawer>
-    with SingleTickerProviderStateMixin {
+class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final productController = Get.find<ProductController>();
 
@@ -24,8 +23,7 @@ class _CustomDrawerState extends State<CustomDrawer>
   void initState() {
     super.initState();
 
-    _tabController =
-        TabController(length: superCategoriesList.length, vsync: this);
+    _tabController = TabController(length: superCategoriesList.length, vsync: this);
   }
 
   @override
@@ -74,8 +72,7 @@ class _CustomDrawerState extends State<CustomDrawer>
                   Expanded(
                     child: TabBarView(
                       controller: _tabController,
-                      children: getProductCategoryInThisSuperCategory(
-                          productController.productCategories),
+                      children: getProductCategoryInThisSuperCategory(productController.productCategories),
                     ),
                   ),
                 ],
@@ -92,11 +89,10 @@ class _CustomDrawerState extends State<CustomDrawer>
 // hence, there is no need to pass the tab index
 // as long as the list of tabs are the same as the list of product categories
 // return list tiles of product categories for selected super category
-List<Widget> getProductCategoryInThisSuperCategory(
-    List<ProductCategory> productCategories) {
+List<Widget> getProductCategoryInThisSuperCategory(List<ProductCategory> productCategories) {
+  final productController = Get.find<ProductController>();
   return superCategoriesList.map((superCategory) {
-    List<ProductCategory> filteredCategories =
-        filterProductCategoryBySuperCategory(superCategory, productCategories);
+    List<ProductCategory> filteredCategories = filterProductCategoryBySuperCategory(superCategory, productCategories);
     return ListView.builder(
         padding: const EdgeInsets.all(0),
         itemCount: filteredCategories.length,
@@ -104,7 +100,11 @@ List<Widget> getProductCategoryInThisSuperCategory(
           final category = filteredCategories[index];
           // return food tile UI
           return ListTile(
-              title: Text(category.name.toUpperCase()), onTap: () {});
+              title: Text(category.name.toUpperCase()),
+              onTap: () {
+                productController.filterByCategory(category.name);
+                Navigator.of(context).pop();
+              });
         });
   }).toList();
 }

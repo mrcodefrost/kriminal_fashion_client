@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import '../../../../common/presentation/view/widgets/primary_button.dart';
 import '../../controller/cart_controller.dart';
 
-class CartScreen extends StatelessWidget {
+List wishList = [];
+
+class CartOrWishlistScreen extends StatelessWidget {
   final CartController cartController = Get.put(CartController()); // Initialize controller
 
-  CartScreen({super.key});
+  CartOrWishlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
