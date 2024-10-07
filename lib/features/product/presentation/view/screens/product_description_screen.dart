@@ -15,9 +15,11 @@ class ProductDescriptionScreen extends StatefulWidget {
 }
 
 class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
+  bool isWishListed = false;
+  Product product = Get.arguments['data'];
+
   @override
   Widget build(BuildContext context) {
-    Product product = Get.arguments['data'];
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -36,11 +38,28 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Text(
-              product.name,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  product.name,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      isWishListed = !isWishListed;
+                    });
+                  },
+                  child: Icon(
+                    isWishListed ? Icons.bookmark : Icons.bookmark_border,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 30,
                   ),
+                ),
+              ],
             ),
             const SizedBox(height: 10),
             Text(
