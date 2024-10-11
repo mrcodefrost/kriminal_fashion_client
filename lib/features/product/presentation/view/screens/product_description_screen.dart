@@ -4,19 +4,19 @@ import 'package:kriminal_fashion_client/features/product/presentation/view/widge
 import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/care_composition_tile.dart';
 import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/select_size_button.dart';
 import 'package:kriminal_fashion_client/utils/constants/app_constants.dart';
+import '../../../../../utils/globals.dart';
+import '../../../../cart/presentation/controller/cart_controller.dart';
 import '../../../data/model/product.dart';
 import '../widgets/buy_now_button.dart';
 
-class ProductDescriptionScreen extends StatefulWidget {
-  const ProductDescriptionScreen({super.key});
+class ProductDescriptionScreen extends StatelessWidget {
+  final bool isWishListed;
+  // bool isWishListed = Get.arguments['isWishListed'];
+  final Product product = Get.arguments['data'];
 
-  @override
-  State<ProductDescriptionScreen> createState() => _ProductDescriptionScreenState();
-}
+  ProductDescriptionScreen({super.key, required this.isWishListed});
 
-class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
-  bool isWishListed = false;
-  Product product = Get.arguments['data'];
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +48,23 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
                       ),
                 ),
                 InkWell(
+                  child: Icon(isWishListed ? Icons.bookmark : Icons.bookmark_border),
                   onTap: () {
-                    setState(() {
-                      isWishListed = !isWishListed;
-                    });
+                    cartController.addOrRemoveFromWishlist(product);
                   },
-                  child: Icon(
-                    isWishListed ? Icons.bookmark : Icons.bookmark_border,
-                    color: Theme.of(context).colorScheme.primary,
-                    size: 30,
-                  ),
                 ),
+                // InkWell(
+                //   onTap: () {
+                //     setState(() {
+                //       isWishListed = !isWishListed;
+                //     });
+                //   },
+                //   child: Icon(
+                //     isWishListed ? Icons.bookmark : Icons.bookmark_border,
+                //     color: Theme.of(context).colorScheme.primary,
+                //     size: 30,
+                //   ),
+                // ),
               ],
             ),
             const SizedBox(height: 10),

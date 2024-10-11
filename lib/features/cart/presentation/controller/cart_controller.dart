@@ -11,6 +11,18 @@ class CartController extends GetxController {
     selectedIndex.value = index;
   }
 
+  void addOrRemoveFromWishlist(Product product) {
+    if (wishListedProducts.contains(product)) {
+      wishListedProducts.remove(product); // Remove from wishlist
+    } else {
+      wishListedProducts.add(product); // Add to wishlist
+    }
+  }
+
+  bool isProductWishListed(Product product) {
+    return wishListedProducts.contains(product);
+  }
+
   // Future<void> fetchWishListedProducts() async {
   //   try {
   //     QuerySnapshot productSnapshot = await productCollection.get();

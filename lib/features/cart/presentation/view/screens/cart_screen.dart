@@ -106,26 +106,34 @@ class WishlistContent extends StatelessWidget {
             : Column(
                 children: [
                   const SizedBox(height: 10),
-                  GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, crossAxisSpacing: 8, childAspectRatio: 0.62, mainAxisSpacing: 10),
-                      itemCount: cartController.wishListedProducts.length,
-                      itemBuilder: (context, index) {
-                        return ProductCard(
-                          name: cartController.wishListedProducts[index].name,
-                          price: cartController.wishListedProducts[index].price,
-                          offerTag: cartController.wishListedProducts[index].shortTag,
-                          onTap: () {
-                            Get.to(() => const ProductDescriptionScreen(),
-                                arguments: {'data': cartController.wishListedProducts[index]});
-                          },
-                          imageURL: cartController.wishListedProducts[index].image,
-                          index: index,
-                          // wishListTap: () {
-                          //   cartController.wishListedProducts.add(cartController.wishListedProducts[index]);
-                          // },
-                        );
-                      }),
+                  Expanded(
+                    child: GridView.builder(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, crossAxisSpacing: 8, childAspectRatio: 0.62, mainAxisSpacing: 10),
+                        itemCount: cartController.wishListedProducts.length,
+                        itemBuilder: (context, index) {
+                          final product = cartController.wishListedProducts[index];
+                          final isWishListed = cartController.isProductWishListed(product);
+                          return ProductCard(
+                            name: cartController.wishListedProducts[index].name,
+                            price: cartController.wishListedProducts[index].price,
+                            offerTag: cartController.wishListedProducts[index].shortTag,
+                            onTap: () {
+                              Get.to(
+                                  () => ProductDescriptionScreen(
+                                        isWishListed: isWishListed,
+                                      ),
+                                  arguments: {'data': product});
+                            },
+                            imageURL: cartController.wishListedProducts[index].image,
+                            index: index,
+                            wishlistIcon: const SizedBox.shrink(),
+                            // wishListTap: () {
+                            //   cartController.wishListedProducts.add(cartController.wishListedProducts[index]);
+                            // },
+                          );
+                        }),
+                  ),
                 ],
               ),
       ),

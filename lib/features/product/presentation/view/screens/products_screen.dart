@@ -111,19 +111,32 @@ class ProductsScreen extends StatelessWidget {
                           crossAxisCount: 2, crossAxisSpacing: 8, childAspectRatio: 0.62, mainAxisSpacing: 10),
                       itemCount: productController.filteredProducts.length,
                       itemBuilder: (context, index) {
+                        final product = productController.filteredProducts[index];
+
+                        // Call isProductWishListed directly
+                        final isWishListed = cartController.isProductWishListed(product);
                         return ProductCard(
                           name: productController.filteredProducts[index].name,
                           price: productController.filteredProducts[index].price,
                           offerTag: productController.filteredProducts[index].shortTag,
                           onTap: () {
-                            Get.to(() => const ProductDescriptionScreen(),
-                                arguments: {'data': productController.filteredProducts[index]});
+                            Get.to(
+                                () => ProductDescriptionScreen(
+                                      isWishListed: isWishListed,
+                                    ),
+                                arguments: {'data': product});
                           },
                           imageURL: productController.filteredProducts[index].image,
                           index: index,
                           // wishListTap: () {
                           //   cartController.wishListedProducts.add(cartController.wishListedProducts[index]);
                           // }
+                          wishlistIcon: InkWell(
+                            child: Icon(isWishListed ? Icons.bookmark : Icons.bookmark_border),
+                            onTap: () {
+                              cartController.addOrRemoveFromWishlist(product);
+                            },
+                          ),
                         );
                       }),
                 ),
