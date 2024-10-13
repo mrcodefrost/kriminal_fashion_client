@@ -15,8 +15,63 @@ class AccountScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          ListTile(
+            leading: Icon(
+              Icons.lightbulb,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+            title: const Text('Purchases'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.lightbulb,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+            title: const Text('Wishlist'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.lightbulb,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+            title: const Text('Notifications'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.lightbulb,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+            title: const Text('Payment Methods'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.lightbulb,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+            title: const Text('Profile'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.lightbulb,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+            title: const Text('Settings'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.lightbulb,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+            title: const Text('Help'),
+            onTap: () {},
+          ),
           ListTile(
             leading: Icon(
               Icons.lightbulb,
