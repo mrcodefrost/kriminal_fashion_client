@@ -52,6 +52,7 @@ class ProductsScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(right: 8.0, top: 8, bottom: 8),
                         child: Chip(
+                          key: UniqueKey(),
                           backgroundColor: Theme.of(context).colorScheme.surface,
                           labelStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
                           elevation: 0,

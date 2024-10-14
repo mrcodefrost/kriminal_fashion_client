@@ -98,6 +98,12 @@ ThemeData lightMode = ThemeData(
       borderSide: BorderSide(color: Colors.red, width: 2),
     ),
   ),
+  // iconTheme: IconThemeData(
+  //   color: lightColorScheme.primary,
+  // ),
+  listTileTheme: ListTileThemeData(
+    iconColor: lightColorScheme.primary,
+  ),
 );
 
 // ThemeData updateTheme = ThemeData(

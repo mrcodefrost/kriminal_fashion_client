@@ -102,4 +102,7 @@ ThemeData darkMode = ThemeData(
       borderSide: BorderSide(color: Colors.red, width: 2),
     ),
   ),
+  listTileTheme: ListTileThemeData(
+    iconColor: darkColorScheme.primary,
+  ),
 );

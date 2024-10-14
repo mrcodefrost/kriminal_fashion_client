@@ -55,6 +55,7 @@ dependencies:
 dev_dependencies:
   json_serializable : ^6.7.1
   build_runner: ^2.4.7
+  flutter_launcher_icons: "^0.13.1"
   flutter_test:
     sdk: flutter
 
@@ -108,10 +109,33 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_native_splash:
-  image: assets/images/splashLogo.png
+  image: assets/images/splashLogo.jpg
   color: "#FAFAFF"
   android_12:
-    image: assets/images/splashLogo.png
+    image: assets/images/splashLogo.jpg
     color: "#FAFAFF"
 #  android_disable_fullscreen: true
 # run the command dart run flutter_native_splash:create
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/splashLogo.jpg"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: false
+    image_path: "assets/images/splashLogo.jpg"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: false
+    image_path: "assets/images/splashLogo.jpg"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: false
+    image_path: "assets/images/splashLogo.jpg"
+
+#    After setting up the configuration, all that is left to do is run the package.
+#
+# flutter pub get
+# dart run flutter_launcher_icons
