@@ -5,13 +5,6 @@ class AppImages {
   static const String splashLogo = 'assets/images/splashLogo.jpg';
 }
 
-class AppSecrets {
-  // secret key should not be on client side
-  static const String stripeSecretKey = '';
-  static const String stripePublishableKey = '';
-  static const String razorpaySecretKey = '';
-}
-
 class AppStrings {
   static const String appName = 'K R I M I N A L';
   static const String compositionText = '\n'

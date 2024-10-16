@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
-import '../../../../utils/constants/app_constants.dart';
+import '../../../../utils/constants/app_secrets.dart';
 
 class StripeService {
   // private constructor
