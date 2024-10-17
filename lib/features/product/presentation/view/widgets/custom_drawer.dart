@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kriminal_fashion_client/features/cart/presentation/controller/cart_controller.dart';
+import 'package:kriminal_fashion_client/features/cart/presentation/view/screens/cart_screen.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/custom_tab_bar.dart';
 import 'package:kriminal_fashion_client/features/product/data/model/product_category.dart';
 
@@ -19,6 +21,8 @@ class CustomDrawer extends StatefulWidget {
 class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final productController = Get.find<ProductController>();
+  // remove later
+  final cartController = Get.find<CartController>();
 
   @override
   void initState() {
@@ -55,13 +59,15 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
                       const Spacer(),
                       TextButton(
                         onPressed: () {
-                          Get.to(AccountScreen());
+                          Get.to(() => AccountScreen());
                         },
                         child: const Text('MY ACCOUNT'),
                       ),
                       TextButton(
-                        onPressed: () {},
-                        child: const Text('CART (0)'),
+                        onPressed: () {
+                          Get.to(() => CartOrWishlistScreen());
+                        },
+                        child: Text('CART (${cartController.wishListedProducts.length})'),
                       ),
                     ],
                   ),
