@@ -33,7 +33,7 @@ class CartOrWishlistScreen extends StatelessWidget {
                       })),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           Obx(
             () => Expanded(
               child: cartController.selectedIndex.value == 0
