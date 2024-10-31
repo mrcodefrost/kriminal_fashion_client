@@ -15,7 +15,7 @@ class ProductsScreen extends StatelessWidget {
 
   final List<String> dropDownItems = ['Rs. Low to High', 'Rs. High to Low'];
   final productController = Get.find<ProductController>();
-  final cartController = Get.put(CartController());
+  final cartController = Get.find<CartController>();
 
   final List<String> sizesList = ['XS', 'S', 'M', 'L', 'XL'];
 
@@ -32,7 +32,8 @@ class ProductsScreen extends StatelessWidget {
                   onPressed: () {
                     Get.to(() => CartOrWishlistScreen());
                   },
-                  child: Text('CART (${cartController.wishListedProducts.length})')),
+                  child: Text(
+                      'CART (${cartController.wishListedProducts.length})')),
             ],
           ),
           drawer: const CustomDrawer(),
@@ -47,20 +48,28 @@ class ProductsScreen extends StatelessWidget {
                     itemCount: productController.productCategories.length,
                     itemBuilder: (context, index) => InkWell(
                       onTap: () {
-                        productController.filterByCategory(productController.productCategories[index].name);
+                        productController.filterByCategory(
+                            productController.productCategories[index].name);
                       },
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0, top: 8, bottom: 8),
+                        padding: const EdgeInsets.only(
+                            right: 8.0, top: 8, bottom: 8),
                         child: Chip(
                           key: UniqueKey(),
-                          backgroundColor: Theme.of(context).colorScheme.surface,
-                          labelStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.surface,
+                          labelStyle: TextStyle(
+                              color: Theme.of(context).colorScheme.primary),
                           elevation: 0,
                           surfaceTintColor: Colors.transparent,
-                          label: Text(productController.productCategories[index].name.toUpperCase()),
+                          label: Text(productController
+                              .productCategories[index].name
+                              .toUpperCase()),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
-                              side: BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                              side: BorderSide(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary)),
                         ),
                       ),
                     ),
@@ -73,7 +82,10 @@ class ProductsScreen extends StatelessWidget {
                       children: [
                         TextButton(
                             onPressed: () {
-                              getBottomSheet(context: context, items: sizesList, onTap: () {});
+                              getBottomSheet(
+                                  context: context,
+                                  items: sizesList,
+                                  onTap: () {});
                             },
                             child: Text('SIZE')),
                         TextButton(onPressed: () {}, child: Text('PRICE')),
@@ -108,18 +120,26 @@ class ProductsScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 Expanded(
                   child: GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, crossAxisSpacing: 8, childAspectRatio: 0.62, mainAxisSpacing: 10),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 8,
+                              childAspectRatio: 0.62,
+                              mainAxisSpacing: 10),
                       itemCount: productController.filteredProducts.length,
                       itemBuilder: (context, index) {
-                        final product = productController.filteredProducts[index];
+                        final product =
+                            productController.filteredProducts[index];
 
                         // Call isProductWishListed directly
-                        final isWishListed = cartController.isProductWishListed(product);
+                        final isWishListed =
+                            cartController.isProductWishListed(product);
                         return ProductCard(
                           name: productController.filteredProducts[index].name,
-                          price: productController.filteredProducts[index].price,
-                          offerTag: productController.filteredProducts[index].shortTag,
+                          price:
+                              productController.filteredProducts[index].price,
+                          offerTag: productController
+                              .filteredProducts[index].shortTag,
                           onTap: () {
                             Get.to(
                                 () => ProductDescriptionScreen(
@@ -127,13 +147,16 @@ class ProductsScreen extends StatelessWidget {
                                     ),
                                 arguments: {'data': product});
                           },
-                          imageURL: productController.filteredProducts[index].image,
+                          imageURL:
+                              productController.filteredProducts[index].image,
                           index: index,
                           // wishListTap: () {
                           //   cartController.wishListedProducts.add(cartController.wishListedProducts[index]);
                           // }
                           wishlistIcon: InkWell(
-                            child: Icon(isWishListed ? Icons.bookmark : Icons.bookmark_border),
+                            child: Icon(isWishListed
+                                ? Icons.bookmark
+                                : Icons.bookmark_border),
                             onTap: () {
                               cartController.addOrRemoveFromWishlist(product);
                             },
@@ -150,7 +173,10 @@ class ProductsScreen extends StatelessWidget {
   }
 }
 
-void getBottomSheet({required BuildContext context, required List<String> items, required VoidCallback onTap}) {
+void getBottomSheet(
+    {required BuildContext context,
+    required List<String> items,
+    required VoidCallback onTap}) {
   showModalBottomSheet(
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.zero,
@@ -174,13 +200,15 @@ void getBottomSheet({required BuildContext context, required List<String> items,
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: Chip(
                     backgroundColor: Theme.of(context).colorScheme.surface,
-                    labelStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
+                    labelStyle:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
                     elevation: 0,
                     surfaceTintColor: Colors.transparent,
                     label: Text(category.toUpperCase()),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.zero,
-                        side: BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                        side: BorderSide(
+                            color: Theme.of(context).colorScheme.secondary)),
                   ),
                 ),
               );

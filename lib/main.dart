@@ -24,12 +24,14 @@ Future<void> _setup() async {
   WidgetsFlutterBinding.ensureInitialized();
   // always place Firebase.initializeApp first after ensureInitialized
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await GetStorage.init();
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   Get.put(prefs);
   Get.put(AuthController());
   Get.put(ProductController());
+  Get.put(CartController());
   // TODO uncomment for stripe
   // Stripe.publishableKey = AppSecrets.stripePublishableKey;
 }
