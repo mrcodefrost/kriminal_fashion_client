@@ -14,9 +14,6 @@ Kriminal Fashion App is the customer-facing application for browsing and purchas
  <img src = "https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/repo%20resources/4.png?raw=true" width="250"/>
  <img src = "https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/repo%20resources/5.png?raw=true" width="250"/>
   <img src = "https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/repo%20resources/6.png?raw=true" width="250"/>
-  <img src = "https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/repo%20resources/7.png?raw=true" width="250"/>
-  <img src = "https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/repo%20resources/8.png?raw=true" width="250"/>
-  <img src = "https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/repo%20resources/9.png?raw=true" width="250"/>
 </div>
 
 ### Features
