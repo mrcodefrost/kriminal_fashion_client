@@ -115,6 +115,7 @@ class AuthController extends GetxController {
       LoadingDialog.removeProgressIndicatorAlertDialog();
     } catch (e) {
       // debugPrint('Error signing out: $e');
+      logg.e('Error signout: $e');
     }
   }
 
