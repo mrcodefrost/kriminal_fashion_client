@@ -27,6 +27,9 @@ class ProfileScreen extends StatelessWidget {
             title: Text('PASSWORD'),
             subtitle: Text('********'),
           ),
+          ProfileTile(
+            title: Text('VOUCHERS'),
+          ),
         ],
       ),
     );
