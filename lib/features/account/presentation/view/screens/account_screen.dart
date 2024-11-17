@@ -6,6 +6,7 @@ import 'package:kriminal_fashion_client/features/cart/presentation/view/screens/
 import '../../../../../themes/theme_controller.dart';
 import '../../../../auth/presentation/controller/auth_controller.dart';
 import '../../../../profile/presentation/view/screens/profile_screen.dart';
+import '../../../../purchases/presentation/view/screens/purchases_screen.dart';
 import '../widgets/accounts_tile.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -58,7 +59,7 @@ class AccountScreen extends StatelessWidget {
       title: 'Purchases',
       icon: Icons.shopping_cart,
       onTap: () {
-        // Get.to(() => const PurchasesScreen());
+        Get.to(() => const PurchasesScreen());
       },
     ),
     AccountsTile(
