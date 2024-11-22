@@ -14,9 +14,21 @@ class LoadingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-        child: CircularProgressIndicator(
-      color: Colors.black,
-    ));
+    // TODO : layout not correct, need to fix
+    return Container(
+      height: 100,
+      width: 200,
+      color: Colors.white,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text('LOADING'),
+          SizedBox(height: 20),
+          CircularProgressIndicator(
+            color: Colors.black,
+          ),
+        ],
+      ),
+    );
   }
 }
