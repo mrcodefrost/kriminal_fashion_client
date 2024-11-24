@@ -16,8 +16,12 @@ class LoadingDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 110, vertical: 30),
         decoration: BoxDecoration(
-            color: Colors.grey, border: Border.all(color: Colors.purple)),
+            color: Theme.of(context).colorScheme.surface,
+            border: Border.all(color: Theme.of(context).colorScheme.primary, width: 2),
+
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -25,9 +29,10 @@ class LoadingDialog extends StatelessWidget {
               'LOADING',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 50),
             CircularProgressIndicator(
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.primary,
+              strokeWidth: 2,
             ),
           ],
         ),

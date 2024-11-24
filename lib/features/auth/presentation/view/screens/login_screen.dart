@@ -10,7 +10,7 @@ import '../../../../common/presentation/view/widgets/custom_text_field.dart';
 import '../../../../common/presentation/view/widgets/loading_dialog.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key, required this.onTap});
+  const LoginScreen({super.key, required this.onTap});
 
   final VoidCallback onTap;
 
@@ -94,9 +94,9 @@ class _LoginScreenState extends State<LoginScreen> {
               SecondaryButton(
                 text: 'LOGIN',
                 onPressed: () {
-                  // if (_loginFormKey.currentState!.validate()) {
-                  //   authController.loginWithEmail();
-                  // }
+                  if (_loginFormKey.currentState!.validate()) {
+                    authController.loginWithEmail();
+                  }
                   LoadingDialog.showProgressIndicatorAlertDialog();
                 },
               ),
