@@ -14,20 +14,23 @@ class LoadingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO : layout not correct, need to fix
-    return Container(
-      height: 100,
-      width: 200,
-      color: Colors.white,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text('LOADING'),
-          SizedBox(height: 20),
-          CircularProgressIndicator(
-            color: Colors.black,
-          ),
-        ],
+    return Center(
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.grey, border: Border.all(color: Colors.purple)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'LOADING',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const SizedBox(height: 40),
+            CircularProgressIndicator(
+              color: Colors.black,
+            ),
+          ],
+        ),
       ),
     );
   }
