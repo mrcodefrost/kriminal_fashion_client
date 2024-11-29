@@ -38,10 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const Spacer(),
               const Text(
                 'KRIMINAL',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    letterSpacing: 12),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 12),
               ),
               const Spacer(),
               Text(
@@ -81,9 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         obscureText = !obscureText;
                       });
                     },
-                    icon: obscureText
-                        ? const Icon(Icons.visibility_off)
-                        : const Icon(Icons.visibility)),
+                    icon: obscureText ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility)),
                 inputFormatters: [
                   InputFormatter.trimSpaces(),
                   InputFormatter.emptyValidator(),
@@ -102,9 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextButton(
                   onPressed: () {
-                    Get.offAll(RegisterScreen(
-                      onTap: widget.onTap,
-                    ));
+                    Get.offAll(() => RegisterScreen(onTap: widget.onTap));
                   },
                   child: Text(
                     'Don\'t have an account? Register',
