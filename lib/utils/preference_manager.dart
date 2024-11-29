@@ -2,6 +2,7 @@ import 'package:get_storage/get_storage.dart';
 
 class PreferenceManager {
   static const String userId = "userId";
+  static const String userName = "userName";
   static const String isPrefDarkMode = "isPrefDarkMode";
 
   static GetStorage getStorage() {
@@ -10,11 +11,11 @@ class PreferenceManager {
 
   static setObjectData(String key, dynamic value) async {
     final jsonValue = value.toJson();
-    getStorage().write(key, jsonValue);
+    await getStorage().write(key, jsonValue);
   }
 
-  static setData(String key, dynamic value) async {
-    getStorage().write(key, value);
+  static Future<void> setData(String key, dynamic value) async {
+    await getStorage().write(key, value);
   }
 
   static dynamic getData(String key) {
@@ -22,6 +23,6 @@ class PreferenceManager {
   }
 
   static deleteData() async {
-    getStorage().erase();
+    await getStorage().erase();
   }
 }
