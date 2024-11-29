@@ -35,13 +35,13 @@ class AuthController extends GetxController {
     Map<String, dynamic>? user = box.read('loginUser');
     if (user != null) {
       loginUser = ClientUser.fromJson(user);
-      Get.off(const AuthGate());
+      Get.off(() => const AuthGate());
     }
     super.onReady();
   }
 
   @override
-  void onInit() {
+  void onInit()   {
     super.onInit();
     userCollection = firestore.collection('users');
   }
@@ -61,11 +61,10 @@ class AuthController extends GetxController {
     LoadingDialog.showProgressIndicatorAlertDialog();
     try {
       await firebaseAuth.createUserWithEmailAndPassword(
-          email: registerEmailController.text,
-          password: registerPasswordController.text);
+          email: registerEmailController.text, password: registerPasswordController.text);
       addUser();
       LoadingDialog.removeProgressIndicatorAlertDialog();
-      Get.offAll(const AuthGate());
+      Get.offAll(() => const AuthGate());
     } catch (e) {
       logg.e(e);
     }
@@ -82,8 +81,7 @@ class AuthController extends GetxController {
       );
       final clientUserJson = clientUser.toJson();
       doc.set(clientUserJson);
-      Get.snackbar('Success', 'User added successfully',
-          colorText: Colors.green);
+      Get.snackbar('Success', 'User added successfully', colorText: Colors.green);
     } catch (e) {
       Get.snackbar('Error', 'Unable to create user', colorText: Colors.red);
       debugPrint(e.toString());
@@ -96,10 +94,9 @@ class AuthController extends GetxController {
     LoadingDialog.showProgressIndicatorAlertDialog();
     try {
       await firebaseAuth.signInWithEmailAndPassword(
-          email: loginEmailController.text,
-          password: loginPasswordController.text);
+          email: loginEmailController.text, password: loginPasswordController.text);
       LoadingDialog.removeProgressIndicatorAlertDialog();
-      Get.offAll(const AuthGate());
+      Get.offAll(() => const AuthGate());
       clearLoginControllers();
     } catch (e) {
       logg.e(e);
