@@ -43,7 +43,6 @@ dependencies:
   cloud_firestore: ^5.4.1
   json_annotation: ^4.8.1
   liquid_pull_to_refresh: ^3.0.1
-  otp_text_field_v2: ^1.0.3
   firebase_auth: ^5.2.1
   get_storage: ^2.1.1
   logger: ^2.4.0
