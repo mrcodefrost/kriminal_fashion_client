@@ -1,6 +1,13 @@
 import 'package:get_storage/get_storage.dart';
 
 class PreferenceManager {
+  static const String userId = "userId";
+  static const String isPrefDarkMode = "isPrefDarkMode";
+
+  static GetStorage getStorage() {
+    return GetStorage();
+  }
+
   static setObjectData(String key, dynamic value) async {
     final jsonValue = value.toJson();
     getStorage().write(key, jsonValue);
@@ -12,10 +19,6 @@ class PreferenceManager {
 
   static dynamic getData(String key) {
     return getStorage().read(key);
-  }
-
-  static GetStorage getStorage() {
-    return GetStorage();
   }
 
   static deleteData() async {
