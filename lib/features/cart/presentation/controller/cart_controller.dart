@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kriminal_fashion_client/features/cart/data/models/cartItem.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/loading_dialog.dart';
 import 'package:kriminal_fashion_client/utils/globals.dart';
+import 'package:kriminal_fashion_client/utils/preference_manager.dart';
 
 import '../../../product/data/model/product.dart';
 
@@ -12,12 +16,26 @@ class CartController extends GetxController {
   late CollectionReference cartCollection;
   late CollectionReference wishlistCollection;
 
+  // ====== VARIABLES ====== //
+
   var selectedIndex = 0.obs;
   RxList<Product> wishListedProducts = <Product>[].obs;
+
+  // ====== STATES ====== //
+
+  @override
+  void onInit() {
+    super.onInit();
+    userCollection = firestore.collection('users');
+  }
+
+  // ====== FUNCTIONS ====== //
 
   void switchView(int index) {
     selectedIndex.value = index;
   }
+
+  // ====== WISHLIST CRUD ====== //
 
   void addOrRemoveFromWishlist(Product product) {
     if (wishListedProducts.contains(product)) {
@@ -31,32 +49,53 @@ class CartController extends GetxController {
     return wishListedProducts.contains(product);
   }
 
-  // ====== STATES ====== //
-
-  @override
-  void onInit() {
-    super.onInit();
-    userCollection = firestore.collection('users');
-  }
-
   // ====== CART CRUD ====== //
 
-  // Future<void> addToCart() async {
-  //   try {
-  //     // Generate a unique ID for the cart item
-  //     DocumentReference cartDocRef =
-  //         userCollection.doc(userId).collection('cartItems').doc(); // Generate a unique cart item ID
-  //
-  //     cartItem.id = cartDocRef.id; // Assign the generated ID to the cart item
-  //
-  //     // Save the cart item to Firestore
-  //     cartDocRef.set(cartItem.toJson()).then((_) {
-  //       Get.snackbar('Success', 'Cart item added successfully', colorText: Colors.green);
-  //     });
-  //   } catch (e) {
-  //     logg.e('Error adding to cart: $e');
-  //   }
-  // }
+  Future<void> addToCart(Product product) async {
+    try {
+      LoadingDialog.showProgressIndicatorAlertDialog();
+      String userId = PreferenceManager.getData(PreferenceManager.userId);
+      logg.d(userId, error: 'Item added in cart for UUID');
+
+      // If product already in cart then increment the quantity
+      CollectionReference cartItemsCollection = userCollection.doc(userId).collection('cartItems');
+      QuerySnapshot querySnapshot = await cartItemsCollection.where('productId', isEqualTo: product.id).get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        DocumentSnapshot existingCartItem = querySnapshot.docs.first;
+
+        double currentQuantity = existingCartItem['quantity'] ?? 0;
+        await cartItemsCollection.doc(existingCartItem.id).update({
+          'quantity': currentQuantity + 1,
+        });
+        LoadingDialog.removeProgressIndicatorAlertDialog();
+        Get.snackbar('Success', 'Quantity updated successfully', colorText: Colors.green);
+      }
+
+      // If product not in cart then add it
+      else {
+        // Generate a unique ID for the cart item
+        DocumentReference cartDocRef =
+            userCollection.doc(userId).collection('cartItems').doc(); // Generate a unique cart item ID
+
+        CartItem cartItem = CartItem(
+          id: cartDocRef.id, // Assign the generated ID to the cart item
+          productId: product.id,
+          name: product.name,
+          image: product.image,
+          price: product.price,
+          quantity: 1,
+        );
+
+        final cartItemJson = cartItem.toJson();
+        await cartDocRef.set(cartItemJson);
+        LoadingDialog.removeProgressIndicatorAlertDialog();
+        Get.snackbar('Success', 'Cart item added successfully', colorText: Colors.green);
+      }
+    } catch (e) {
+      logg.e('Error adding to cart: $e');
+    }
+  }
 
   Future<void> removeFromCart() async {}
 

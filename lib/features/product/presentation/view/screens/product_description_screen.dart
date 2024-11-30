@@ -85,7 +85,11 @@ class ProductDescriptionScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 20),
-            const AddToCartButton(),
+            AddToCartButton(
+              onPressed: () {
+                cartController.addToCart(product);
+              },
+            ),
             const SizedBox(height: 10),
             const BuyNowButton(),
             const SizedBox(height: 40),

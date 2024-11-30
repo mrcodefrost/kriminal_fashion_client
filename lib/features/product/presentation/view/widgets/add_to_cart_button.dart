@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AddToCartButton extends StatelessWidget {
-  const AddToCartButton({super.key});
+  final VoidCallback onPressed;
+
+  const AddToCartButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class AddToCartButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           'ADD TO CART',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
