@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kriminal_fashion_client/features/cart/presentation/view/screens/cart_screen.dart';
+import 'package:kriminal_fashion_client/utils/preference_manager.dart';
 
 import '../../../../../themes/theme_controller.dart';
+import '../../../../../utils/globals.dart';
 import '../../../../auth/presentation/controller/auth_controller.dart';
 import '../../../../profile/presentation/view/screens/profile_screen.dart';
 import '../../../../purchases/presentation/view/screens/purchases_screen.dart';

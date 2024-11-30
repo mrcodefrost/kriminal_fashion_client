@@ -120,7 +120,6 @@ class AuthController extends GetxController {
       LoadingDialog.removeProgressIndicatorAlertDialog();
       Get.offAll(() => const AuthGate());
       clearLoginControllers();
-      logg.i(PreferenceManager.getData(PreferenceManager.userId));
     } catch (e) {
       logg.e(e);
     }
@@ -134,6 +133,7 @@ class AuthController extends GetxController {
       update();
       await PreferenceManager.deleteData();
       LoadingDialog.removeProgressIndicatorAlertDialog();
+      logg.d('PreferenceManager deleted');
     } catch (e) {
       logg.e('Error sign out: $e');
     }
@@ -141,6 +141,7 @@ class AuthController extends GetxController {
 
   Future<void> saveUserDataInPrefs({required String uuid}) async {
     await PreferenceManager.setData(PreferenceManager.userId, uuid);
+    logg.d(PreferenceManager.getData(PreferenceManager.userId), error: "UUID saved in prefs");
   }
 }
 
