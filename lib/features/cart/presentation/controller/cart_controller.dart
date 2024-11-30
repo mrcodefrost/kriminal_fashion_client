@@ -20,6 +20,7 @@ class CartController extends GetxController {
 
   var selectedIndex = 0.obs;
   RxList<Product> wishListedProducts = <Product>[].obs;
+  RxList<CartItem> cartItems = <CartItem>[].obs;
 
   // ====== STATES ====== //
 
@@ -50,6 +51,18 @@ class CartController extends GetxController {
   }
 
   // ====== CART CRUD ====== //
+
+  Stream<List<CartItem>> streamCartItems() {
+    String userId = PreferenceManager.getData(PreferenceManager.userId);
+
+    return userCollection
+        .doc(userId)
+        .collection('cartItems')
+        .snapshots()
+        .map((querySnapshot) => querySnapshot.docs.map((doc) {
+              return CartItem.fromJson(doc.data());
+            }).toList());
+  }
 
   Future<void> addToCart(Product product) async {
     try {

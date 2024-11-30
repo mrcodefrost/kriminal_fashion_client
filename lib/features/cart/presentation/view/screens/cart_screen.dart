@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/loading_dialog.dart';
 
 import '../../../../common/presentation/view/widgets/primary_button.dart';
 import '../../../../product/presentation/view/screens/product_description_screen.dart';
 import '../../../../product/presentation/view/widgets/product_card.dart';
+import '../../../data/models/cartItem.dart';
 import '../../controller/cart_controller.dart';
 
 class CartOrWishlistScreen extends StatelessWidget {
@@ -50,29 +52,62 @@ class CartOrWishlistScreen extends StatelessWidget {
 }
 
 class CartContent extends StatelessWidget {
-  const CartContent({super.key});
+  final cartController = Get.find<CartController>();
+  CartContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
-      child: SizedBox(
-        width: double.maxFinite,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(
-              Icons.shopping_bag,
-              size: 40,
+    return StreamBuilder<List<CartItem>>(
+      stream: cartController.streamCartItems(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return LoadingDialog.showProgressIndicatorAlertDialog();
+        }
+
+        if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        }
+
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: SizedBox(
+              width: double.maxFinite,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.shopping_bag,
+                    size: 40,
+                  ),
+                  SizedBox(height: 20),
+                  Text('YOUR CART IS EMPTY'),
+                  SizedBox(height: 20),
+                  Text('The items you add will be shown here')
+                ],
+              ),
             ),
-            SizedBox(height: 20),
-            Text('YOUR CART IS EMPTY'),
-            SizedBox(height: 20),
-            Text('The items you add will be shown here')
-          ],
-        ),
-      ),
+          );
+          ;
+        }
+
+        final cartItems = snapshot.data!;
+
+        return ListView.builder(
+          itemCount: cartItems.length,
+          itemBuilder: (context, index) {
+            final cartItem = cartItems[index];
+
+            return ListTile(
+              leading: Image.network(cartItem.image),
+              title: Text(cartItem.name),
+              subtitle: Text('Quantity: ${cartItem.quantity}'),
+              trailing: Text('₹${cartItem.price * cartItem.quantity}'),
+            );
+          },
+        );
+      },
     );
   }
 }
