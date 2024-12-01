@@ -95,9 +95,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 text: 'LOGIN',
                 onPressed: () {
                   if (_loginFormKey.currentState!.validate()) {
+                    LoadingDialog.showProgressIndicatorAlertDialog();
                     authController.loginWithEmail();
                   }
-                  LoadingDialog.showProgressIndicatorAlertDialog();
                 },
               ),
               TextButton(
