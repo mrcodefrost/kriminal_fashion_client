@@ -7,7 +7,6 @@ import 'package:kriminal_fashion_client/features/common/presentation/view/widget
 
 import '../../../../../utils/validations.dart';
 import '../../../../common/presentation/view/widgets/custom_text_field.dart';
-import '../../../../common/presentation/view/widgets/loading_dialog.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, required this.onTap});
@@ -95,7 +94,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 text: 'LOGIN',
                 onPressed: () {
                   if (_loginFormKey.currentState!.validate()) {
-                    LoadingDialog.showProgressIndicatorAlertDialog();
                     authController.loginWithEmail();
                   }
                 },
