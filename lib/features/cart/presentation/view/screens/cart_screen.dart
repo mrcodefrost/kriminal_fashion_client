@@ -9,7 +9,8 @@ import '../../../data/models/cartItem.dart';
 import '../../controller/cart_controller.dart';
 
 class CartOrWishlistScreen extends StatelessWidget {
-  final CartController cartController = Get.put(CartController()); // Initialize controller
+  final CartController cartController =
+      Get.put(CartController()); // Initialize controller
 
   CartOrWishlistScreen({super.key});
 
@@ -61,9 +62,11 @@ class CartContent extends StatelessWidget {
       stream: cartController.streamCartItems(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return LoadingDialog.showProgressIndicatorAlertDialog();
+          // Showing dialogs or triggering side-effects (like navigation or showing overlays) directly inside builder
+          // causes the build cycle to behave unexpectedly and throw errors like visitChildElements
+          // Use stateless loading indicators instead, hence call the widget directly
+          return const LoadingDialog();
         }
-
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         }
@@ -135,7 +138,8 @@ class WishlistContent extends StatelessWidget {
                   SizedBox(height: 20),
                   Text('YOU DO NOT HAVE ANY SAVED ITEMS'),
                   SizedBox(height: 20),
-                  Text('Save your favourites and share them with anyone you like')
+                  Text(
+                      'Save your favourites and share them with anyone you like')
                 ],
               )
             : Column(
@@ -143,16 +147,24 @@ class WishlistContent extends StatelessWidget {
                   const SizedBox(height: 10),
                   Expanded(
                     child: GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, crossAxisSpacing: 8, childAspectRatio: 0.62, mainAxisSpacing: 10),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 8,
+                                childAspectRatio: 0.62,
+                                mainAxisSpacing: 10),
                         itemCount: cartController.wishListedProducts.length,
                         itemBuilder: (context, index) {
-                          final product = cartController.wishListedProducts[index];
-                          final isWishListed = cartController.isProductWishListed(product);
+                          final product =
+                              cartController.wishListedProducts[index];
+                          final isWishListed =
+                              cartController.isProductWishListed(product);
                           return ProductCard(
                             name: cartController.wishListedProducts[index].name,
-                            price: cartController.wishListedProducts[index].price,
-                            offerTag: cartController.wishListedProducts[index].shortTag,
+                            price:
+                                cartController.wishListedProducts[index].price,
+                            offerTag: cartController
+                                .wishListedProducts[index].shortTag,
                             onTap: () {
                               Get.to(
                                   () => ProductDescriptionScreen(
@@ -160,7 +172,8 @@ class WishlistContent extends StatelessWidget {
                                       ),
                                   arguments: {'data': product});
                             },
-                            imageURL: cartController.wishListedProducts[index].image,
+                            imageURL:
+                                cartController.wishListedProducts[index].image,
                             index: index,
                             wishlistIcon: const SizedBox.shrink(),
                             // wishListTap: () {
