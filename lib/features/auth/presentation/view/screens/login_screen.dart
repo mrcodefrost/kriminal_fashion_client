@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_client/features/auth/presentation/controller/auth_controller.dart';
 import 'package:kriminal_fashion_client/features/auth/presentation/view/screens/register_screen.dart';
+import 'package:kriminal_fashion_client/features/auth/presentation/view/widgets/copy_text_widget.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/secondary_button.dart';
-import 'package:kriminal_fashion_client/features/product/presentation/view/screens/products_screen.dart';
 
 import '../../../../../utils/validations.dart';
 import '../../../../common/presentation/view/widgets/custom_text_field.dart';
@@ -38,7 +38,10 @@ class _LoginScreenState extends State<LoginScreen> {
               const Spacer(),
               const Text(
                 'KRIMINAL',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 12),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    letterSpacing: 12),
               ),
               const Spacer(),
               Text(
@@ -78,7 +81,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         obscureText = !obscureText;
                       });
                     },
-                    icon: obscureText ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility)),
+                    icon: obscureText
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(Icons.visibility)),
                 inputFormatters: [
                   InputFormatter.trimSpaces(),
                   InputFormatter.emptyValidator(),
@@ -103,12 +108,37 @@ class _LoginScreenState extends State<LoginScreen> {
                     'Don\'t have an account? Register',
                     style: Theme.of(context).textTheme.titleSmall,
                   )),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  onPressed: () {
-                    Get.offAll(() => ProductsScreen());
-                  },
-                  child: const Text('Skip Sign In')),
+              const SizedBox(height: 50),
+              const Text(
+                'Demo account credentials',
+                style: TextStyle(decoration: TextDecoration.underline),
+              ),
+
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 50.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SelectionArea(
+                          child: Text('ID: kriminal@test.com'),
+                        ),
+                        CopyTextButton(textToCopy: 'kriminal@test.com'),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SelectionArea(
+                          child: Text('Password: 123456789'),
+                        ),
+                        CopyTextButton(textToCopy: '123456789'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
               const Spacer(),
             ],
           ),
