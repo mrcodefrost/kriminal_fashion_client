@@ -49,6 +49,10 @@ class CartController extends GetxController {
   bool isProductWishListed(Product product) {
     return wishListedProducts.contains(product);
   }
+  
+  // Todo
+  // Add to wishlist API
+  // Remove from wishlist API
 
   // ====== CART CRUD ====== //
 
