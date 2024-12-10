@@ -28,6 +28,30 @@ class PaymentOptionsScreen extends StatelessWidget {
                     RazorpayService.instance.onPaymentButtonTap();
                   },
                   child: const Text('Razorpay')),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                  onPressed: () {
+                    // StripeService.instance.makePayment();
+
+                    RazorpayService.instance.onPaymentButtonTap();
+                  },
+                  child: const Text('Paypal')),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                  onPressed: () {
+                    // StripeService.instance.makePayment();
+
+                    RazorpayService.instance.onPaymentButtonTap();
+                  },
+                  child: const Text('Square')),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                  onPressed: () {
+                    // StripeService.instance.makePayment();
+
+                    RazorpayService.instance.onPaymentButtonTap();
+                  },
+                  child: const Text('PayU')),
             ],
           ),
         ),
