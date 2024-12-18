@@ -9,51 +9,58 @@ class PaymentOptionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    StripeService.instance.makePayment();
-                  },
-                  child: const Text('Stripe')),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  onPressed: () {
-                    // StripeService.instance.makePayment();
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          spacing: 20,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Please select your preferred payment gateway'),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  foregroundColor: Theme.of(context).colorScheme.surface,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  shape: BeveledRectangleBorder(
+                    side: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  StripeService.instance.makePayment();
+                },
+                child: const Text('Stripe')),
+            ElevatedButton(
+                onPressed: () {
+                  // StripeService.instance.makePayment();
 
-                    RazorpayService.instance.onPaymentButtonTap();
-                  },
-                  child: const Text('Razorpay')),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  onPressed: () {
-                    // StripeService.instance.makePayment();
+                  RazorpayService.instance.onPaymentButtonTap();
+                },
+                child: const Text('Razorpay')),
+            ElevatedButton(
+                onPressed: () {
+                  // StripeService.instance.makePayment();
 
-                    RazorpayService.instance.onPaymentButtonTap();
-                  },
-                  child: const Text('Paypal')),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  onPressed: () {
-                    // StripeService.instance.makePayment();
+                  RazorpayService.instance.onPaymentButtonTap();
+                },
+                child: const Text('Paypal')),
+            ElevatedButton(
+                onPressed: () {
+                  // StripeService.instance.makePayment();
 
-                    RazorpayService.instance.onPaymentButtonTap();
-                  },
-                  child: const Text('Square')),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  onPressed: () {
-                    // StripeService.instance.makePayment();
+                  RazorpayService.instance.onPaymentButtonTap();
+                },
+                child: const Text('Square')),
+            ElevatedButton(
+                onPressed: () {
+                  // StripeService.instance.makePayment();
 
-                    RazorpayService.instance.onPaymentButtonTap();
-                  },
-                  child: const Text('PayU')),
-            ],
-          ),
+                  RazorpayService.instance.onPaymentButtonTap();
+                },
+                child: const Text('PayU')),
+          ],
         ),
       ),
     );
