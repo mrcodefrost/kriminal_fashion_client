@@ -6,7 +6,7 @@ import 'package:kriminal_fashion_client/features/common/presentation/view/widget
 import '../../../../common/presentation/view/widgets/primary_button.dart';
 import '../../../../product/presentation/view/screens/product_description_screen.dart';
 import '../../../../product/presentation/view/widgets/product_card.dart';
-import '../../../data/models/cartItem.dart';
+import '../../../data/models/cart_item.dart';
 import '../../controller/cart_controller.dart';
 
 class CartOrWishlistScreen extends StatelessWidget {

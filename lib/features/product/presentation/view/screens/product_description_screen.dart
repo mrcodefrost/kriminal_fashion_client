@@ -4,7 +4,6 @@ import 'package:kriminal_fashion_client/features/product/presentation/view/widge
 import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/care_composition_tile.dart';
 import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/select_size_button.dart';
 import 'package:kriminal_fashion_client/utils/constants/app_constants.dart';
-import '../../../../../utils/globals.dart';
 import '../../../../cart/presentation/controller/cart_controller.dart';
 import '../../../data/model/product.dart';
 import '../widgets/buy_now_button.dart';

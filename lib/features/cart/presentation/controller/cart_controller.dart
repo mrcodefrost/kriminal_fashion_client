@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kriminal_fashion_client/features/cart/data/models/cartItem.dart';
+import 'package:kriminal_fashion_client/features/cart/data/models/cart_item.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/loading_dialog.dart';
 import 'package:kriminal_fashion_client/utils/globals.dart';
 import 'package:kriminal_fashion_client/utils/preference_manager.dart';
@@ -49,7 +49,7 @@ class CartController extends GetxController {
   bool isProductWishListed(Product product) {
     return wishListedProducts.contains(product);
   }
-  
+
   // Todo
   // Add to wishlist API
   // Remove from wishlist API
@@ -75,8 +75,11 @@ class CartController extends GetxController {
       logg.d(userId, error: 'Item added in cart for UUID');
 
       // If product already in cart then increment the quantity
-      CollectionReference cartItemsCollection = userCollection.doc(userId).collection('cartItems');
-      QuerySnapshot querySnapshot = await cartItemsCollection.where('productId', isEqualTo: product.id).get();
+      CollectionReference cartItemsCollection =
+          userCollection.doc(userId).collection('cartItems');
+      QuerySnapshot querySnapshot = await cartItemsCollection
+          .where('productId', isEqualTo: product.id)
+          .get();
 
       if (querySnapshot.docs.isNotEmpty) {
         DocumentSnapshot existingCartItem = querySnapshot.docs.first;
@@ -86,14 +89,17 @@ class CartController extends GetxController {
           'quantity': currentQuantity + 1,
         });
         LoadingDialog.removeProgressIndicatorAlertDialog();
-        Get.snackbar('Success', 'Quantity updated successfully', colorText: Colors.green);
+        Get.snackbar('Success', 'Quantity updated successfully',
+            colorText: Colors.green);
       }
 
       // If product not in cart then add it
       else {
         // Generate a unique ID for the cart item
-        DocumentReference cartDocRef =
-            userCollection.doc(userId).collection('cartItems').doc(); // Generate a unique cart item ID
+        DocumentReference cartDocRef = userCollection
+            .doc(userId)
+            .collection('cartItems')
+            .doc(); // Generate a unique cart item ID
 
         CartItem cartItem = CartItem(
           id: cartDocRef.id, // Assign the generated ID to the cart item
@@ -107,7 +113,8 @@ class CartController extends GetxController {
         final cartItemJson = cartItem.toJson();
         await cartDocRef.set(cartItemJson);
         LoadingDialog.removeProgressIndicatorAlertDialog();
-        Get.snackbar('Success', 'Cart item added successfully', colorText: Colors.green);
+        Get.snackbar('Success', 'Cart item added successfully',
+            colorText: Colors.green);
       }
     } catch (e) {
       logg.e('Error adding to cart: $e');

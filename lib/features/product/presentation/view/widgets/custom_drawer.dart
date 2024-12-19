@@ -5,7 +5,6 @@ import 'package:kriminal_fashion_client/features/cart/presentation/view/screens/
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/custom_tab_bar.dart';
 import 'package:kriminal_fashion_client/features/product/data/model/product_category.dart';
 
-import '../../../../../utils/globals.dart';
 import '../../../../account/presentation/view/screens/account_screen.dart';
 import '../../../../common/data/model/super_category.dart';
 import '../../../../common/domain/usecase/common_usecases.dart';

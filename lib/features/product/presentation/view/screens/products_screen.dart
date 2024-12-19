@@ -74,9 +74,9 @@ class ProductsScreen extends StatelessWidget {
                             onPressed: () {
                               getBottomSheet(context: context, items: sizesList, onTap: () {});
                             },
-                            child: Text('SIZE')),
-                        TextButton(onPressed: () {}, child: Text('PRICE')),
-                        TextButton(onPressed: () {}, child: Text('COLOUR')),
+                            child: const Text('SIZE')),
+                        TextButton(onPressed: () {}, child: const Text('PRICE')),
+                        TextButton(onPressed: () {}, child: const Text('COLOUR')),
                       ],
                     ),
                   ],

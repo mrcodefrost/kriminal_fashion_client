@@ -12,8 +12,8 @@ class PurchasesScreen extends StatelessWidget {
           Text(
             'PURCHASES'.toUpperCase(),
           ),
-          Spacer(),
-          Text(''),
+          const Spacer(),
+          const Text(''),
         ],
       ),
     );
