@@ -20,21 +20,25 @@ class CartOrWishlistScreen extends StatelessWidget {
       appBar: AppBar(),
       body: Column(
         children: [
-          Row(
-            children: [
-              Flexible(
-                  child: PrimaryButton(
-                      text: 'Cart',
-                      onPressed: () {
-                        cartController.switchView(0);
-                      })),
-              Flexible(
-                  child: PrimaryButton(
-                      text: 'Wishlist',
-                      onPressed: () {
-                        cartController.switchView(1);
-                      })),
-            ],
+          Obx(
+            () => Row(
+              children: [
+                Flexible(
+                    flex: cartController.selectedIndex.value == 0 ? 2 : 1,
+                    child: PrimaryButton(
+                        text: 'Cart',
+                        onPressed: () {
+                          cartController.switchView(0);
+                        })),
+                Flexible(
+                    flex: cartController.selectedIndex.value == 1 ? 2 : 1,
+                    child: PrimaryButton(
+                        text: 'Wishlist',
+                        onPressed: () {
+                          cartController.switchView(1);
+                        })),
+              ],
+            ),
           ),
           const SizedBox(height: 15),
           Obx(
