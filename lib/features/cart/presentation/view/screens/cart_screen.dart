@@ -1,3 +1,4 @@
+import 'package:animated_collection/animated_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/loading_dialog.dart';
@@ -23,20 +24,28 @@ class CartOrWishlistScreen extends StatelessWidget {
           Obx(
             () => Row(
               children: [
-                Flexible(
-                    flex: cartController.selectedIndex.value == 0 ? 2 : 1,
-                    child: PrimaryButton(
-                        text: 'Cart',
-                        onPressed: () {
-                          cartController.switchView(0);
-                        })),
-                Flexible(
-                    flex: cartController.selectedIndex.value == 1 ? 2 : 1,
-                    child: PrimaryButton(
-                        text: 'Wishlist',
-                        onPressed: () {
-                          cartController.switchView(1);
-                        })),
+                AnimatedFlexible(
+                  // IMPORTANT
+                  // Flex values must be very high to ensure smooth animation since flex is an int and not double
+                  // Tween through small values causes the animation to be choppy
+                  // The ratio in the current UI is 2:1 for flex, update it in case of UI change
+                  flex: cartController.selectedIndex.value == 0 ? 200.0 : 100.0,
+                  child: PrimaryButton(
+                    text: 'Cart',
+                    onPressed: () {
+                      cartController.switchView(0);
+                    },
+                  ),
+                ),
+                AnimatedFlexible(
+                  flex: cartController.selectedIndex.value == 1 ? 200.0 : 100.0,
+                  child: PrimaryButton(
+                    text: 'Wishlist',
+                    onPressed: () {
+                      cartController.switchView(1);
+                    },
+                  ),
+                ),
               ],
             ),
           ),
