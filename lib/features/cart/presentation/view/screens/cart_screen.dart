@@ -105,7 +105,6 @@ class CartContent extends StatelessWidget {
               ),
             ),
           );
-          ;
         }
 
         final cartItems = snapshot.data!;
