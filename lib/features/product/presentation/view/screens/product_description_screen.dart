@@ -40,11 +40,15 @@ class ProductDescriptionScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  product.name,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                SizedBox(
+                  width: Get.width -
+                      70, // Required to avoid pushing Wishlist icon off the screen
+                  child: Text(
+                    product.name,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
                 ),
                 InkWell(
                   child: Icon(
