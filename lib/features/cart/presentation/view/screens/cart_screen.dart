@@ -61,7 +61,6 @@ class CartOrWishlistScreen extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 15),
           Obx(
             () => Expanded(
               child: cartController.selectedIndex.value == 0
@@ -122,15 +121,91 @@ class CartContent extends StatelessWidget {
         final cartItems = snapshot.data!;
 
         return ListView.builder(
+          shrinkWrap: true,
           itemCount: cartItems.length,
           itemBuilder: (context, index) {
             final cartItem = cartItems[index];
-
-            return ListTile(
-              leading: Image.network(cartItem.image),
-              title: Text(cartItem.name),
-              subtitle: Text('Quantity: ${cartItem.quantity}'),
-              trailing: Text('₹${cartItem.price * cartItem.quantity}'),
+            return Container(
+              height: 290,
+              decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(color: Colors.black)),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                spacing: 5,
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      border: Border(right: BorderSide(color: Colors.black)),
+                    ),
+                    child: Image.network(
+                      cartItem.image,
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.bookmark_border)),
+                            IconButton(
+                                onPressed: () {}, icon: const Icon(Icons.close))
+                          ],
+                        ),
+                        const SizedBox(height: 40),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              cartItem.name,
+                              style: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            Text(
+                              '₹${cartItem.price * cartItem.quantity}',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            const SizedBox(height: 10),
+                            const Text('M | BLACK'),
+                          ],
+                        ),
+                        const Spacer(),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.remove),
+                                padding: EdgeInsets.zero,
+                                constraints:
+                                    const BoxConstraints(), // needed to remove padding
+                                style: IconButton.styleFrom(
+                                    shape: BeveledRectangleBorder(
+                                        side: BorderSide(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ))),
+                              ),
+                              const Text('-'),
+                              Text('${cartItem.quantity}'),
+                              const Text('+'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             );
           },
         );

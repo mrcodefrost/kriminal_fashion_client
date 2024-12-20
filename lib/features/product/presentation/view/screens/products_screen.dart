@@ -7,7 +7,6 @@ import 'package:kriminal_fashion_client/features/product/presentation/view/widge
 import 'package:kriminal_fashion_client/features/product/presentation/view/widgets/product_card.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-import '../../../../../utils/globals.dart';
 import '../../../../cart/presentation/controller/cart_controller.dart';
 import '../../../../cart/presentation/view/screens/cart_screen.dart';
 
