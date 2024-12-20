@@ -47,7 +47,8 @@ class ProductDescriptionScreen extends StatelessWidget {
                       ),
                 ),
                 InkWell(
-                  child: Icon(isWishListed ? Icons.bookmark : Icons.bookmark_border),
+                  child: Icon(
+                      isWishListed ? Icons.bookmark : Icons.bookmark_border),
                   onTap: () {
                     cartController.addOrRemoveFromWishlist(product);
                   },
