@@ -25,18 +25,30 @@ class CartOrWishlistScreen extends StatelessWidget {
             () => Row(
               children: [
                 AnimatedFlexible(
-                  // IMPORTANT
-                  // Flex values must be very high to ensure smooth animation since flex is an int and not double
-                  // Tween through small values causes the animation to be choppy
-                  // The ratio in the current UI is 2:1 for flex, update it in case of UI change
-                  flex: cartController.selectedIndex.value == 0 ? 200.0 : 100.0,
-                  child: PrimaryButton(
-                    text: 'Cart',
-                    onPressed: () {
-                      cartController.switchView(0);
-                    },
-                  ),
-                ),
+                    // IMPORTANT
+                    // Flex values must be very high to ensure smooth animation since flex is an int and not double
+                    // Tween through small values causes the animation to be choppy
+                    // The ratio in the current UI is 2:1 for flex, update it in case of UI change
+                    flex:
+                        cartController.selectedIndex.value == 0 ? 200.0 : 100.0,
+                    child: StreamBuilder<int>(
+                      stream: cartController.streamCartItemCount(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return PrimaryButton(
+                            onPressed: () {},
+                            text: 'CART (0)',
+                          );
+                        }
+                        final cartItemCount = snapshot.data!;
+                        return PrimaryButton(
+                          text: 'Cart ($cartItemCount)',
+                          onPressed: () {
+                            cartController.switchView(0);
+                          },
+                        );
+                      },
+                    )),
                 AnimatedFlexible(
                   flex: cartController.selectedIndex.value == 1 ? 200.0 : 100.0,
                   child: PrimaryButton(
