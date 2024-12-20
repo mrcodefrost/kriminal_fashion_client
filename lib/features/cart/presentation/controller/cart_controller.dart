@@ -68,6 +68,16 @@ class CartController extends GetxController {
             }).toList());
   }
 
+  Stream<int> streamCartItemCount() {
+    String userId = PreferenceManager.getData(PreferenceManager.userId);
+
+    return userCollection
+        .doc(userId)
+        .collection('cartItems')
+        .snapshots()
+        .map((querySnapshot) => querySnapshot.docs.length);
+  }
+
   Future<void> addToCart(Product product) async {
     try {
       LoadingDialog.showProgressIndicatorAlertDialog();
