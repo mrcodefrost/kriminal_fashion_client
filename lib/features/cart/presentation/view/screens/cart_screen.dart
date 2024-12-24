@@ -182,22 +182,25 @@ class CartContent extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.remove),
-                                padding: EdgeInsets.zero,
-                                constraints:
-                                    const BoxConstraints(), // needed to remove padding
-                                style: IconButton.styleFrom(
-                                    shape: BeveledRectangleBorder(
-                                        side: BorderSide(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                ))),
+                              Container(
+                                margin: const EdgeInsets.only(right: 10),
+                                padding: const EdgeInsets.all(5),
+                                decoration: const BoxDecoration(
+                                  border: Border(
+                                      right: BorderSide(color: Colors.black)),
+                                ),
+                                child: const Icon(Icons.add),
                               ),
-                              const Text('-'),
                               Text('${cartItem.quantity}'),
-                              const Text('+'),
+                              Container(
+                                margin: const EdgeInsets.only(left: 10),
+                                padding: const EdgeInsets.all(5),
+                                decoration: const BoxDecoration(
+                                  border: Border(
+                                      left: BorderSide(color: Colors.black)),
+                                ),
+                                child: const Icon(Icons.remove),
+                              ),
                             ],
                           ),
                         ),
