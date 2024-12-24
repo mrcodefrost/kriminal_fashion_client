@@ -1,7 +1,9 @@
 import 'package:animated_collection/animated_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kriminal_fashion_client/features/common/presentation/view/screens/payment_options_screen.dart';
 import 'package:kriminal_fashion_client/features/common/presentation/view/widgets/loading_dialog.dart';
+import 'package:kriminal_fashion_client/themes/light_mode.dart';
 
 import '../../../../common/presentation/view/widgets/primary_button.dart';
 import '../../../../product/presentation/view/screens/product_description_screen.dart';
@@ -120,99 +122,183 @@ class CartContent extends StatelessWidget {
 
         final cartItems = snapshot.data!;
 
-        return ListView.builder(
-          shrinkWrap: true,
-          itemCount: cartItems.length,
-          itemBuilder: (context, index) {
-            final cartItem = cartItems[index];
-            return Container(
-              height: 290,
-              decoration: const BoxDecoration(
-                border: Border(bottom: BorderSide(color: Colors.black)),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                spacing: 5,
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      border: Border(right: BorderSide(color: Colors.black)),
-                    ),
-                    child: Image.network(
-                      cartItem.image,
-                    ),
+        return Stack(
+          children: [
+            ListView.builder(
+              padding: const EdgeInsets.only(bottom: 80),
+              shrinkWrap: true,
+              itemCount: cartItems.length,
+              itemBuilder: (context, index) {
+                final cartItem = cartItems[index];
+                return Container(
+                  height: 290,
+                  decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                            color: Theme.of(context).colorScheme.primary)),
                   ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.bookmark_border)),
-                            IconButton(
-                                onPressed: () {}, icon: const Icon(Icons.close))
-                          ],
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 5,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                              right: BorderSide(
+                                  color:
+                                      Theme.of(context).colorScheme.primary)),
                         ),
-                        const SizedBox(height: 40),
-                        Column(
+                        child: Image.network(
+                          cartItem.image,
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              cartItem.name,
-                              style: Theme.of(context).textTheme.labelLarge,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(Icons.bookmark_border)),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(Icons.close))
+                              ],
                             ),
-                            Text(
-                              '₹${cartItem.price * cartItem.quantity}',
-                              style: Theme.of(context).textTheme.bodyMedium,
+                            const SizedBox(height: 40),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  cartItem.name,
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                Text(
+                                  '₹ ${cartItem.price * cartItem.quantity}',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                const SizedBox(height: 10),
+                                const Text('M | BLACK'),
+                              ],
                             ),
-                            const SizedBox(height: 10),
-                            const Text('M | BLACK'),
+                            const Spacer(),
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 20),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(right: 10),
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                          right: BorderSide(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary)),
+                                    ),
+                                    child: Icon(
+                                      Icons.add,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
+                                  ),
+                                  Text('${cartItem.quantity}'),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 10),
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                          left: BorderSide(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary)),
+                                    ),
+                                    child: Icon(
+                                      Icons.remove,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
-                        const Spacer(),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(right: 10),
-                                padding: const EdgeInsets.all(5),
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                      right: BorderSide(color: Colors.black)),
-                                ),
-                                child: const Icon(Icons.add),
-                              ),
-                              Text('${cartItem.quantity}'),
-                              Container(
-                                margin: const EdgeInsets.only(left: 10),
-                                padding: const EdgeInsets.all(5),
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                      left: BorderSide(color: Colors.black)),
-                                ),
-                                child: const Icon(Icons.remove),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          },
+                );
+              },
+            ),
+            const Positioned(bottom: 0, child: CheckoutBottomSheet())
+          ],
         );
       },
+    );
+  }
+}
+
+class CheckoutBottomSheet extends StatelessWidget {
+  const CheckoutBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      width: Get.width,
+      decoration: BoxDecoration(
+        border: Border(
+            top: BorderSide(color: Theme.of(context).colorScheme.primary)),
+      ),
+      child: Row(children: [
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              Get.to(const PaymentOptionsScreen());
+            },
+            child: Container(
+              color: lightColorScheme.primary,
+              child: Center(
+                  child: Text(
+                'CONTINUE',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(color: Colors.white),
+              )),
+            ),
+          ),
+        ),
+        Expanded(
+            child: Container(
+          color: lightColorScheme.surface,
+          padding: const EdgeInsets.only(right: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 10,
+            children: [
+              Text('TOTAL \t \t \t ₹ 500.00',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Colors.black, fontWeight: FontWeight.bold)),
+              Text('INCLUDING GST \n FREE DELIVERY',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(color: Colors.black))
+            ],
+          ),
+        ))
+      ]),
     );
   }
 }
