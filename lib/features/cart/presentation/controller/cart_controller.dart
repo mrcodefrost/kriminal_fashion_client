@@ -36,6 +36,10 @@ class CartController extends GetxController {
     selectedIndex.value = index;
   }
 
+  double get totalPrice {
+    return cartItems.fold(0.0, (sum, item) => sum + (item.price * item.quantity));
+  }
+
   // ====== WISHLIST CRUD ====== //
 
   void addOrRemoveFromWishlist(Product product) {

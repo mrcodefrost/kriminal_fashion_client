@@ -248,6 +248,10 @@ class CartContent extends StatelessWidget {
 }
 
 class CheckoutBottomSheet extends StatelessWidget {
+
+
+  final cartController = Get.find<CartController>();
+
   const CheckoutBottomSheet({super.key});
 
   @override
@@ -287,9 +291,13 @@ class CheckoutBottomSheet extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 10,
             children: [
-              Text('TOTAL \t \t \t ₹ 500.00',
+              Obx(() {
+
+                final totalPrice = cartController.totalPrice;
+                return Text('TOTAL \t \t \t ₹ ${totalPrice.toStringAsFixed(2)}',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.black, fontWeight: FontWeight.bold)),
+                      color: Colors.black, fontWeight: FontWeight.bold))}),
+
               Text('INCLUDING GST \n FREE DELIVERY',
                   style: Theme.of(context)
                       .textTheme
