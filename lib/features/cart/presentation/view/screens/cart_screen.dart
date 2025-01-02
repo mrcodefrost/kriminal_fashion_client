@@ -239,7 +239,7 @@ class CartContent extends StatelessWidget {
                 );
               },
             ),
-            const Positioned(bottom: 0, child: CheckoutBottomSheet())
+            Positioned(bottom: 0, child: CheckoutBottomSheet())
           ],
         );
       },
@@ -248,11 +248,9 @@ class CartContent extends StatelessWidget {
 }
 
 class CheckoutBottomSheet extends StatelessWidget {
-
-
   final cartController = Get.find<CartController>();
 
-  const CheckoutBottomSheet({super.key});
+  CheckoutBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -292,12 +290,11 @@ class CheckoutBottomSheet extends StatelessWidget {
             spacing: 10,
             children: [
               Obx(() {
-
                 final totalPrice = cartController.totalPrice;
                 return Text('TOTAL \t \t \t ₹ ${totalPrice.toStringAsFixed(2)}',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.black, fontWeight: FontWeight.bold))}),
-
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Colors.black, fontWeight: FontWeight.bold));
+              }),
               Text('INCLUDING GST \n FREE DELIVERY',
                   style: Theme.of(context)
                       .textTheme
