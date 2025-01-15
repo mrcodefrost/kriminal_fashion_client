@@ -5,7 +5,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final bool obscureText;
-  final Icon prefixIcon;
+  final Icon? prefixIcon;
   final String labelText;
   final String hintText;
   final List<TextInputFormatter>? inputFormatters;
@@ -16,7 +16,7 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.controller,
     this.keyboardType,
-    required this.prefixIcon,
+    this.prefixIcon,
     required this.labelText,
     required this.hintText,
     this.inputFormatters,

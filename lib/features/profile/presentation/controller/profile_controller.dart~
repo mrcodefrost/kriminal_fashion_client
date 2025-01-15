@@ -1,0 +1,23 @@
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+
+class ProfileController extends GetxController {
+  // ========= CONTROLLERS ========= //
+  final TextEditingController currentPassword = TextEditingController();
+  final TextEditingController newEmail = TextEditingController();
+
+  // ========= VARIABLES ========= //
+
+
+  // ========== STATES ========== //
+  @override
+  void onReady() async {
+    super.onReady();
+
+  }
+
+  // ========== UI FUNCTIONS ========== //
+
+  // ========== APIs FUNCTIONS ========== //
+
+}
