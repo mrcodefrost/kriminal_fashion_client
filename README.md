@@ -110,6 +110,8 @@ Activate Flutterfire CLI
    firebase deploy --only hosting:client
  ```
 
+5. In the event there are issues with deployment then refer to [Firebase Hosting Deployment Guide](https://github.com/mrcodefrost/kriminal_fashion_client/blob/main/documentation/firebase_deploy_guide.md).
+
 ### License
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
